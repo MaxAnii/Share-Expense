@@ -17,6 +17,8 @@ router.post("/login/failed", async (req, res) => {
 });
 
 router.get("/login/success", async (req, res) => {
+  console.log("called");
+  console.log(req.user);
   if (req.user) {
     res.status(200).json({
       success: true,
@@ -42,8 +44,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login/failed" }),
   function (req, res) {
     // Successful authentication, redirect home.
-
-    console.log(req.user);
+    console.log(req.session);
     res.redirect("http://localhost:3000/home");
   }
 );
@@ -51,34 +52,25 @@ router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    successRedirect: "http://localhost:3000/home",
     failureRedirect: "/login/failed",
-  })
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    console.log("git");
+    console.log(req.session);
+    res.redirect("http://localhost:3000/home");
+  }
 );
-
-// router.post(
-//   "/login",
-//   passport.authenticate("local", { failureRedirect: "/login/failed" }),
-//   function (req, res) {
-//     res.redirect("/");
-//   }
-// );
-// router.post(
-//   "/login",
-//   passport.authenticate("local", { failureRedirect: "login/failed" }),
-//   function (req, res) {
-//     res.redirect("http://localhost:3000/home");
-//   }
-// );
 
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login/failed" }),
   function (req, res) {
     // Successful authentication, redirect home.
-
+    // req.session.user = req.user;
     console.log("successful");
-    // res.redirect("http://localhost:3000/home");
+    console.log(req.session);
+    res.redirect("http://localhost:3000");
   }
 );
 module.exports = router;

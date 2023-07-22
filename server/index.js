@@ -29,9 +29,7 @@ app.use(
 );
 
 app.use("/auth", authRoute);
-app.post("/lll", (req, res) => {
-  console.log(req.body);
-});
+
 app.listen("5000", () => {
   console.log("server  is alive");
 });
