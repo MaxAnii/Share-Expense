@@ -50,7 +50,7 @@ const App = () => {
             element={user ? <Post /> : <Navigate to="/login" />}
           /> */}
           <Route path="/signup" element={user ? <Home></Home> : <SignUp />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={user ? <Home /> : <Landing />} />
         </Routes>
       </div>
     </BrowserRouter>
