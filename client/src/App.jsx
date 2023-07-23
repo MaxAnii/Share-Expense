@@ -2,10 +2,9 @@ import Navbar from "./components/Navbar";
 import "./app.css";
 
 // import Post from "./pages/Post";
-import Login from "./pages/Login";
+import LoginSignup from "./pages/LoginSignup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import SignUp from "./pages/SignUp";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 
@@ -44,12 +43,15 @@ const App = () => {
         <Navbar user={user} />
         <Routes>
           <Route path="/" element={user ? <Home></Home> : <Landing />} />
-          <Route path="/login" element={user ? <Home></Home> : <Login />} />
+          <Route
+            path="/login"
+            element={user ? <Home></Home> : <LoginSignup />}
+          />
           {/* <Route
             path="/post/:id"
             element={user ? <Post /> : <Navigate to="/login" />}
           /> */}
-          <Route path="/signup" element={user ? <Home></Home> : <SignUp />} />
+
           <Route path="/home" element={user ? <Home /> : <Landing />} />
         </Routes>
       </div>
