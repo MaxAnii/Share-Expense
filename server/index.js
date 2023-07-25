@@ -1,4 +1,3 @@
-const cookieSession = require("cookie-session");
 const express = require("express");
 const session = require("express-session");
 const passportSetup = require("./passport");
@@ -14,12 +13,15 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
+      domain: "localhost:3000",
+      domain: "localhost",
     },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.authenticate("session"));
 app.use(
   cors({
     origin: "http://localhost:3000",

@@ -3,7 +3,7 @@ const pool = require("./config/db");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GithubStrategy = require("passport-github2").Strategy;
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
 passport.use(
   new GoogleStrategy(
     {
@@ -12,9 +12,6 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //     return cb(err, user);
-      //   });
       done(null, profile);
     }
   )
@@ -27,9 +24,6 @@ passport.use(
       callbackURL: "/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //     return cb(err, user);
-      //   });
       done(null, profile);
     }
   )
@@ -37,19 +31,22 @@ passport.use(
 
 passport.use(
   new LocalStrategy(async function verify(username, password, done) {
-    console.log(username, password);
     try {
       const result = await pool.query(
         'SELECT * FROM "user" WHERE "email" = $1 AND "password"=$2',
         [username, password]
       );
+      console.log(result.rows);
       if (result.rows.length === 0) {
-        console.log("not found");
         return done(null, false, {
           message: "Incorrect username or password.",
         });
       }
-      const user = result.rows[0];
+      const user = {
+        id: result.rows[0].id,
+        name: result.rows[0].name,
+        image: result.rows[0].image,
+      };
       return done(null, user);
     } catch (err) {
       return done(err);
@@ -58,8 +55,6 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log("setting session");
-  console.log(user);
   done(null, user);
 });
 passport.deserializeUser((user, done) => {
