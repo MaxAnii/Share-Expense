@@ -13,7 +13,6 @@ const LoginSignup = () => {
   };
   return (
     <div className="login">
-      <h1 className="loginTitle">Choose a Login Method</h1>
       <div className="wrapper">
         <div className="left">
           <div className="loginButton google" onClick={google}>
@@ -30,7 +29,6 @@ const LoginSignup = () => {
           <div className="line" />
           <div className="or">OR</div>
         </div>
-
         <div className="right">
           {show ? (
             <>
@@ -38,6 +36,7 @@ const LoginSignup = () => {
               <div className="signup-link">
                 Don't have an account?{" "}
                 <button
+                  className="signup-link-btn"
                   onClick={() => {
                     setShow(false);
                   }}
@@ -52,6 +51,7 @@ const LoginSignup = () => {
               <div className="signup-link">
                 Already have an account?
                 <button
+                  className="signup-link-btn"
                   onClick={() => {
                     setShow(true);
                   }}

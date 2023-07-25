@@ -5,13 +5,14 @@ const Login = () => {
     password: "",
   });
 
-  const localLogin = async () => {
+  const localLogin = async (e) => {
     fetch("http://localhost:5000/auth/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(user),
     })
       .then((response) => {
