@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -28,9 +30,11 @@ const SignUp = () => {
         body: JSON.stringify(user),
       });
       const data = await res.json();
-      console.log(data.status);
+
       if (data.status == 404) {
         setMessage(data.message);
+      } else {
+        navigate("/home");
       }
     }
   };
