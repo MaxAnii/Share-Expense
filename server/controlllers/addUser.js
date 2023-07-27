@@ -29,6 +29,9 @@ const addNewUser = async (req, res) => {
       [name, email, password, defaultImage, editFlag]
     );
     req.session.user = user.rows[0];
+    res.json({
+      status: 200,
+    });
   }
 };
 module.exports = { addGoogleGitUser, addNewUser };
