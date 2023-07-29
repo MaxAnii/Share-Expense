@@ -8,11 +8,31 @@ const CreateRoom = (props) => {
     adminId: props.adminId,
   });
   const [message, setMessage] = useState("");
-  const createRoom = () => {
+  const [showConfrim, setShowConfrim] = useState(true);
+  const createRoom = async () => {
     setMessage("");
     if (roomDetails.name.length == 0 || roomDetails.desc.length == 0) {
       setMessage("Please fil the details");
     } else {
+      const response = await fetch("http://localhost:5000/user/addroom", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(roomDetails),
+      });
+      if (response.status == 200) {
+        setMessage("Room created");
+        setRoomDetails({
+          id: uuidv4(),
+          name: "",
+          desc: "",
+          adminId: props.adminId,
+        });
+        setShowConfrim(false);
+      } else setMessage("An error has occurred");
     }
   };
   return (
@@ -50,6 +70,9 @@ const CreateRoom = (props) => {
                 className="btn-close modal-close-btn"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={() => {
+                  setShowConfrim(true);
+                }}
               ></button>
             </div>
             <div className="modal-body">
@@ -60,7 +83,15 @@ const CreateRoom = (props) => {
                 >
                   Room Name
                 </label>
-                <input type="text" className="form-control" placeholder="xyz" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="xyz"
+                  value={roomDetails.name || ""}
+                  onChange={(e) =>
+                    setRoomDetails({ ...roomDetails, name: e.target.value })
+                  }
+                />
               </div>
               <div className="mb-3">
                 <label
@@ -74,6 +105,10 @@ const CreateRoom = (props) => {
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="For what purpose the room is created"
+                  value={roomDetails.desc || ""}
+                  onChange={(e) =>
+                    setRoomDetails({ ...roomDetails, desc: e.target.value })
+                  }
                 ></textarea>
               </div>
               <p className="error-message"> {message}</p>
@@ -83,16 +118,23 @@ const CreateRoom = (props) => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                onClick={() => {
+                  setShowConfrim(true);
+                }}
               >
                 Close
               </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={createRoom}
-              >
-                Confrim
-              </button>
+              {showConfrim ? (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={createRoom}
+                >
+                  Confrim
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
