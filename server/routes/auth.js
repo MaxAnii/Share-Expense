@@ -47,7 +47,7 @@ router.get(
     const image = req.user.photos[0].value;
     const user = await addGoogleGitUser(email, name, image);
     req.session.user = user;
-    // res.redirect("http://localhost:3000/");
+    res.redirect("http://localhost:3000/");
   }
 );
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));

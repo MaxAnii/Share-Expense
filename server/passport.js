@@ -36,7 +36,6 @@ passport.use(
         'SELECT * FROM "user" WHERE "email" = $1 AND "password"=$2',
         [username, password]
       );
-      console.log(result.rows);
       if (result.rows.length === 0) {
         return done(null, false, {
           message: "Incorrect username or password.",

@@ -28,7 +28,6 @@ const addNewUser = async (req, res) => {
       'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5) RETURNING *',
       [name, email, password, defaultImage, editFlag]
     );
-    req.session.user = user.rows[0];
     res.json({
       status: 200,
     });
