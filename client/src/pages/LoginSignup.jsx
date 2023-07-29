@@ -47,7 +47,7 @@ const LoginSignup = () => {
             </>
           ) : (
             <>
-              <SignUp></SignUp>
+              <SignUp setShow={setShow}></SignUp>
               <div className="signup-link">
                 Already have an account?
                 <button
