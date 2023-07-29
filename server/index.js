@@ -4,6 +4,7 @@ const passportSetup = require("./passport");
 const passport = require("passport");
 const cors = require("cors");
 const authRoute = require("./routes/auth");
+const mainRoute = require("./routes/mainRoutes");
 const app = express();
 app.use(express.json());
 app.use(
@@ -31,7 +32,7 @@ app.use(
 );
 
 app.use("/auth", authRoute);
-
+app.use("/user", mainRoute);
 app.listen("5000", () => {
   console.log("server  is alive");
 });

@@ -1,16 +1,24 @@
 const pool = require("../config/db");
 
 const addGoogleGitUser = async (email, name, image) => {
-  var user = await pool.query('SELECT * FROM "user" WHERE "email"=$1', [email]);
-  if (user.rows.length == 0) {
+  var result = await pool.query('SELECT * FROM "user" WHERE "email"=$1', [
+    email,
+  ]);
+  if (result.rows.length == 0) {
     const password = "";
     const editFlag = false;
-    user = await pool.query(
+    result = await pool.query(
       'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5) RETURNING *',
       [name, email, password, image, editFlag]
     );
   }
-  return user.rows[0];
+  const user = {
+    id: result.rows[0].email,
+    name: result.rows[0].name,
+    image: result.rows[0].image,
+    editFlag: result.rows[0].editFlag,
+  };
+  return user;
 };
 const addNewUser = async (req, res) => {
   const { name, email, password } = req.body;

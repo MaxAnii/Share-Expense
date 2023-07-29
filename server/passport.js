@@ -42,9 +42,10 @@ passport.use(
         });
       }
       const user = {
-        id: result.rows[0].id,
+        id: result.rows[0].email,
         name: result.rows[0].name,
         image: result.rows[0].image,
+        editFlag: result.rows[0].editFlag,
       };
       return done(null, user);
     } catch (err) {
