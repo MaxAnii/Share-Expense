@@ -1,30 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import CreateRoom from "./CreateRoom";
 
-const RoomList = () => {
+const RoomList = (props) => {
+  var rowCount = 1;
+  const [roomDetails, setRoomDeetails] = useState([]);
+  const getRoom = async () => {
+    const response = await fetch(
+      `http://localhost:5000/user/getroom/${props.adminId}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status === 400) return;
+    else {
+      const data = await response.json();
+      setRoomDeetails(data);
+    }
+  };
+  useEffect(() => {
+    getRoom();
+  }, []);
+  console.log(roomDetails);
   return (
     <div>
       <table className="table table-light table-striped">
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
+          {roomDetails.map((elem) => {
+            return (
+              <>
+                <tr id={rowCount}>
+                  <td>{elem.name}</td>
+                  <td>{elem.description}</td>
+                </tr>
+              </>
+            );
+          })}
         </tbody>
       </table>
+      <CreateRoom adminId={props.adminId} getRoom={getRoom}></CreateRoom>
     </div>
   );
 };

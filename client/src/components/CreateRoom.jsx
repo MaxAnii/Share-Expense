@@ -31,6 +31,7 @@ const CreateRoom = (props) => {
           desc: "",
           adminId: props.adminId,
         });
+        props.getRoom();
         setShowConfrim(false);
       } else setMessage("An error has occurred");
     }
