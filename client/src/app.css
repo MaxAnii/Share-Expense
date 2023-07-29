@@ -237,3 +237,33 @@ border: 0px;
   color: #df4930;
   font-size: medium;
 }
+.room-table{
+  margin-top: 10vh;
+}
+.room-image{
+  margin-left: 5vw;
+  background-color:black;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  text-align: center;
+  font-size: 30px;
+  font-family: 'monospace';
+ 
+  border: #0D7377 solid 2px;
+  font-weight: bold;
+  color: azure;
+}
+.room-description{
+  opacity: .5;
+}
+.room-name{
+  color: #001C30;
+  font-size: larger;
+  font-weight: bolder;
+}
+tr:hover{
+  translate: 4px 4px;
+
+}

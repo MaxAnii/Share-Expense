@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CreateRoom from "./CreateRoom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RoomList = (props) => {
+  const color = ["black", "dimgray", "darkgray", "sliver", "gray"];
+  var colorIndex = 0;
+  const index = () => {
+    colorIndex++;
+    if (colorIndex >= color.length) colorIndex = 0;
+    return colorIndex;
+  };
   var rowCount = 1;
   const [roomDetails, setRoomDeetails] = useState([]);
   const getRoom = async () => {
@@ -22,28 +30,46 @@ const RoomList = (props) => {
       setRoomDeetails(data);
     }
   };
+  const Navigate = useNavigate();
   useEffect(() => {
     getRoom();
   }, []);
-  console.log(roomDetails);
   return (
-    <div>
-      <table className="table table-light table-striped">
-        <tbody>
-          {roomDetails.map((elem) => {
-            return (
-              <>
-                <tr id={rowCount}>
-                  <td>{elem.name}</td>
-                  <td>{elem.description}</td>
-                </tr>
-              </>
-            );
-          })}
-        </tbody>
-      </table>
+    <>
+      <div className="room-table">
+        <table className="table table-light table-striped">
+          <tbody>
+            {roomDetails.map((elem) => {
+              return (
+                <>
+                  <tr
+                    id={rowCount}
+                    className="table-row"
+                    onClick={() => {
+                      Navigate(`/room/${elem.id}`);
+                    }}
+                  >
+                    <td>
+                      <button
+                        className="room-image"
+                        style={{ backgroundColor: color[index()] }}
+                      >
+                        {elem.name[0].toUpperCase()}
+                      </button>
+                    </td>
+                    <td>
+                      <p className="room-name">{elem.name.toUpperCase()}</p>
+                      <p className="room-description">{elem.description}</p>
+                    </td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <CreateRoom adminId={props.adminId} getRoom={getRoom}></CreateRoom>
-    </div>
+    </>
   );
 };
 

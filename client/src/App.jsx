@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
+import Room from "./pages/Room";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -54,6 +55,7 @@ const App = () => {
             path="/home"
             element={user ? <Home user={user} /> : <Landing />}
           />
+          <Route path="/room/:roomid" element={user ? <Room /> : <Landing />} />
         </Routes>
       </div>
     </BrowserRouter>
