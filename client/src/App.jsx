@@ -41,17 +41,19 @@ const App = () => {
       <div>
         <Navbar user={user} />
         <Routes>
-          <Route path="/" element={user ? <Home></Home> : <Landing />} />
+          <Route
+            path="/"
+            element={user ? <Home user={user}> </Home> : <Landing />}
+          />
           <Route
             path="/login"
-            element={user ? <Home></Home> : <LoginSignup />}
+            element={user ? <Home user={user}></Home> : <LoginSignup />}
           />
-          {/* <Route
-            path="/post/:id"
-            element={user ? <Post /> : <Navigate to="/login" />}
-          /> */}
 
-          <Route path="/home" element={user ? <Home /> : <Landing />} />
+          <Route
+            path="/home"
+            element={user ? <Home user={user} /> : <Landing />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

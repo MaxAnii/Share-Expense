@@ -215,3 +215,25 @@ border: 0px;
   color: #df4930;
   font-size: larger;
 }
+.add-room{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  height: 70px;
+  width: 70px;
+  border-radius: 19px;
+}
+.modal-header , .modal-footer{
+  background-color: #001C30;
+  color: white;
+}
+:placeholder-shown{
+  opacity: 0.5;
+}
+.modal-close-btn{
+  background-color: antiquewhite;
+}
+.error-message{
+  color: #df4930;
+  font-size: medium;
+}
