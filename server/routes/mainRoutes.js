@@ -6,4 +6,5 @@ const { addNote, getNote } = require("../controlllers/noteDetails");
 router.post("/addroom", addRoom);
 router.get("/getroom/:id", getRoom);
 router.post("/addnote", addNote);
+router.get("/getnote/:id", getNote);
 module.exports = router;

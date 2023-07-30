@@ -35,13 +35,17 @@ const addNote = async (req, res) => {
 const getNote = async (req, res) => {
   try {
     const { id } = req.params;
-    const reslut = await pool.query('SELECT * FROM "note" WHERE "roomid"=$1', [
-      id,
-    ]);
+    console.log(id);
+    const reslut = await pool.query(
+      'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."email" ORDER BY "creationdate","note"."name" ASC',
+      [id]
+    );
     if (reslut.rows.length !== 0) {
-      res.json(reslut.rows);
+      res.status(200).json(reslut.rows);
     } else {
-      res.status(400);
+      res.status(400).json({
+        message: "Error in fetching notes",
+      });
     }
   } catch (error) {
     console.log(error.message);
