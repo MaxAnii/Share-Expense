@@ -224,11 +224,11 @@ border: 0px;
   border-radius: 19px;
 }
 .modal-header , .modal-footer{
-  background-color: #001C30;
+  background-color: #001c30e5;
   color: white;
 }
 :placeholder-shown{
-  opacity: 0.5;
+  opacity: 0.9;
 }
 .modal-close-btn{
   background-color: antiquewhite;
@@ -269,9 +269,34 @@ border: 0px;
   font-size: larger;
   font-weight: bolder;
 }
-tr:hover>td{
+.room-row:hover>td{
   translate: 5px 5px;
   transform: scale(4px,4px);
-color: #ee2603;;
+color: #ee2603;
 
+}
+
+.total-expense{
+  height: 10vh;
+  padding: 100px;
+padding-top: 2vh;
+  background-color: #001C30;
+  color: aliceblue;
+  border-radius: 30px;
+  font-size: larger;
+}
+
+.table  .date-cell{
+  background-color: #001C30;
+ border-radius: 30px;
+ color: wheat;
+ font-size: large;
+padding: 15px;
+
+}
+
+.overflow-table{
+height: 41vh;
+overflow-x:hidden; 
+ overflow-y:auto;
 }

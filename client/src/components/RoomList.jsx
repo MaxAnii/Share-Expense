@@ -3,7 +3,7 @@ import CreateRoom from "./CreateRoom";
 import { Link, useNavigate } from "react-router-dom";
 
 const RoomList = (props) => {
-  const color = ["black", "dimgray", "darkgray", "sliver", "gray"];
+  const color = ["black", "dimgray", "darkgray", "silver", "gray"];
   var colorIndex = 0;
   const index = () => {
     colorIndex++;
@@ -37,14 +37,14 @@ const RoomList = (props) => {
   return (
     <>
       <div className="room-table">
-        <table className="table table-light table-striped">
+        <table className="table table-light  table-hover">
           <tbody>
             {roomDetails.map((elem) => {
               return (
                 <>
                   <tr
                     id={rowCount}
-                    className="table-row"
+                    className="table-row room-row"
                     onClick={() => {
                       Navigate(`/room/${elem.id}`);
                     }}
