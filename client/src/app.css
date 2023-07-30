@@ -222,6 +222,7 @@ border: 0px;
   height: 70px;
   width: 70px;
   border-radius: 19px;
+  z-index: 2;
 }
 .modal-header , .modal-footer{
   background-color: #001c30e5;
@@ -291,12 +292,15 @@ padding-top: 2vh;
  border-radius: 30px;
  color: wheat;
  font-size: large;
-padding: 15px;
-
+ width: 200px;
+ padding: 20px 0;
 }
 
 .overflow-table{
-height: 41vh;
+height: 40vh;
 overflow-x:hidden; 
  overflow-y:auto;
+}
+.row-gap{
+  height: 1vh;
 }

@@ -5,8 +5,7 @@ import NoteList from "../components/NoteList";
 const Room = ({ user }) => {
   return (
     <>
-      <NoteList></NoteList>
-      <CreateNote adminId={user.id}></CreateNote>
+      <NoteList adminId={user.id}></NoteList>
     </>
   );
 };

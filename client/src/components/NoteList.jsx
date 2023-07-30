@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 import NoteData from "./NoteData";
+import CreateNote from "./CreateNote";
 const NoteList = (props) => {
   const params = useParams();
   const [noteList, setNoteList] = useState([]);
@@ -27,6 +29,7 @@ const NoteList = (props) => {
   }, []);
   return (
     <>
+      <CreateNote adminId={props.adminId}></CreateNote>
       <div className="row text-center row-cols-2 row-cols-md-4 g-4 m-4">
         {noteList.map((elem, index) => {
           return (
@@ -37,7 +40,12 @@ const NoteList = (props) => {
                     <h5 className="card-title">
                       {elem.noteName.toUpperCase()}
                     </h5>
-                    <NoteData noteid={elem.id} name={elem.noteName}></NoteData>
+                    <NoteData
+                      noteid={elem.id}
+                      name={elem.noteName}
+                      userid={elem.adminid}
+                      adminId={props.adminId}
+                    ></NoteData>
                   </div>
                   <div className="card-footer">
                     <small className="text-body-secondary">

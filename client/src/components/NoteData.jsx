@@ -1,6 +1,38 @@
-import React from "react";
-
+import React, { useState } from "react";
+import ViewExpense from "./ViewExpense";
+import { v4 as uuid } from "uuid";
 const NoteData = (props) => {
+  const [noteData, setNoteData] = useState({
+    noteid: props.noteid,
+    expenseid: uuid(),
+    reason: "",
+    amount: "",
+  });
+  const [message, setMessage] = useState("");
+  const addExpense = async (e) => {
+    e.preventDefault();
+    setMessage("");
+    const response = await fetch("http://localhost:5000/user/addexpense", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(noteData),
+    });
+    if (response.status === 200) {
+      setMessage("Expense added");
+      setNoteData({
+        noteid: props.noteid,
+        expenseid: uuid(),
+        reason: "",
+        amount: "",
+      });
+    } else {
+      setMessage("An error has occurred try again");
+    }
+  };
   return (
     <>
       <button
@@ -36,101 +68,43 @@ const NoteData = (props) => {
             </div>
             <div className="modal-body">
               <div>
-                <form>
-                  <div class="input-group mb-3 input-group-lg">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Reason Expense made for"
-                    />
+                {props.userid === props.adminId ? (
+                  <form onSubmit={addExpense}>
+                    <div class="input-group mb-3 input-group-lg">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Reason Expense made for"
+                        value={noteData.reason}
+                        onChange={(e) => {
+                          setNoteData({ ...noteData, reason: e.target.value });
+                        }}
+                        required
+                      />
 
-                    <input
-                      type="number"
-                      class="form-control"
-                      placeholder="Amount you spend"
-                      aria-label="Server"
-                    />
-                  </div>
-                  <button type="submit" class="btn btn-dark">
-                    Submit
-                  </button>
-                </form>
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Amount you spend"
+                        aria-label="Server"
+                        value={noteData.amount}
+                        onChange={(e) => {
+                          setNoteData({ ...noteData, amount: e.target.value });
+                        }}
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-dark">
+                      Submit
+                    </button>
+                  </form>
+                ) : (
+                  ""
+                )}
+                <div className="error-message">{message}</div>
                 <hr></hr>
-
-                <div className="total-expense mb-3 ">
-                  <div>This month's expense </div>
-                  <div>1324</div>
-                </div>
-
-                <hr></hr>
-                <h5>All Expenses</h5>
               </div>
-              <div className="overflow-table">
-                <table class="table table-striped table-borderless">
-                  <thead>
-                    <tr></tr>
-                  </thead>
-                  <tbody>
-                    <tr className="data-row">
-                      <td className="date-cell">2023-30-07</td>
-                      <td className="reason-cell ">
-                        dfgsdfg fdsgdfsgdsfg sdfgsbsfd ghsbsh{" "}
-                      </td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr className="data-row">
-                      <td className="date-cell">Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <ViewExpense noteid={props.noteid}></ViewExpense>
             </div>
             <div className="modal-footer">
               <button
