@@ -12,8 +12,6 @@ const addNote = async (req, res) => {
   try {
     const { id, name, roomid, adminid } = req.body;
     const date = postgresDateFormate();
-    console.log(req.body);
-    console.log(date);
     const result = await pool.query(
       'INSERT INTO "note" VALUES($1,$2,$3,$4,$5) RETURNING *',
       [id, name, roomid, adminid, date]
@@ -35,7 +33,7 @@ const addNote = async (req, res) => {
 const getNote = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+
     const reslut = await pool.query(
       'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."email" ORDER BY "creationdate","note"."name" ASC',
       [id]
@@ -51,4 +49,4 @@ const getNote = async (req, res) => {
     console.log(error.message);
   }
 };
-module.exports = { addNote, getNote };
+module.exports = { addNote, getNote, postgresDateFormate };
