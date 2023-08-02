@@ -16,9 +16,9 @@ const addRoom = async (req, res) => {
 
 const getRoom = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { userid } = req.params;
     const reslut = await pool.query('SELECT * FROM "room" WHERE "adminid"=$1', [
-      id,
+      userid,
     ]);
     if (reslut.rows.length !== 0) {
       res.json(reslut.rows);

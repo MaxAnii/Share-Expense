@@ -32,11 +32,11 @@ const addNote = async (req, res) => {
 
 const getNote = async (req, res) => {
   try {
-    const { id } = req.params;
-
+    const { roomid } = req.params;
+    console.log(req.params);
     const reslut = await pool.query(
-      'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."email" ORDER BY "creationdate","note"."name" ASC',
-      [id]
+      'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."id" ORDER BY "creationdate","note"."name" ASC',
+      [roomid]
     );
     if (reslut.rows.length !== 0) {
       res.status(200).json(reslut.rows);
