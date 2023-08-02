@@ -29,7 +29,7 @@ const NoteList = (props) => {
   }, []);
   return (
     <>
-      <CreateNote adminId={props.adminId}></CreateNote>
+      <CreateNote userid={props.userid} getNote={getNote}></CreateNote>
       <div className="row text-center row-cols-2 row-cols-md-4 g-4 m-4">
         {noteList.map((elem, index) => {
           return (
@@ -43,8 +43,9 @@ const NoteList = (props) => {
                     <NoteData
                       noteid={elem.id}
                       name={elem.noteName}
-                      userid={elem.adminid}
-                      adminId={props.adminId}
+                      usernoteid={elem.adminid}
+                      roomAdminId={params.roomadminId}
+                      userid={props.userid}
                     ></NoteData>
                   </div>
                   <div className="card-footer">

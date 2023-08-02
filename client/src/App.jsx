@@ -1,7 +1,5 @@
 import Navbar from "./components/Navbar";
 import "./app.css";
-
-// import Post from "./pages/Post";
 import LoginSignup from "./pages/LoginSignup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -22,7 +20,6 @@ const App = () => {
       },
     })
       .then((response) => {
-        console.log(response);
         if (response.status === 200) return response.json();
         throw new Error("authentication has been failed!");
       })
@@ -36,7 +33,7 @@ const App = () => {
   useEffect(() => {
     getUser();
   }, []);
-  console.log(user);
+
   return (
     <BrowserRouter>
       <div>
@@ -56,7 +53,7 @@ const App = () => {
             element={user ? <Home user={user} /> : <Landing />}
           />
           <Route
-            path="/room/:roomid"
+            path="/room/:roomid/:roomadminid"
             element={user ? <Room user={user} /> : <Landing />}
           />
         </Routes>

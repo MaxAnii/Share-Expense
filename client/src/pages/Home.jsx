@@ -4,7 +4,7 @@ import RoomList from "../components/RoomList";
 const Home = ({ user }) => {
   return (
     <>
-      <RoomList adminId={user.id}> </RoomList>
+      <RoomList roomAdminId={user.id}> </RoomList>
     </>
   );
 };

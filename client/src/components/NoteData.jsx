@@ -8,6 +8,8 @@ const NoteData = (props) => {
     reason: "",
     amount: "",
   });
+  const [getNewData, setGetNewData] = useState(false);
+
   const [message, setMessage] = useState("");
   const addExpense = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ const NoteData = (props) => {
       body: JSON.stringify(noteData),
     });
     if (response.status === 200) {
+      setGetNewData(!getNewData);
       setMessage("Expense added");
       setNoteData({
         noteid: props.noteid,
@@ -68,7 +71,7 @@ const NoteData = (props) => {
             </div>
             <div className="modal-body">
               <div>
-                {props.userid === props.adminId ? (
+                {props.usernoteid === props.userid ? (
                   <form onSubmit={addExpense}>
                     <div class="input-group mb-3 input-group-lg">
                       <input
@@ -104,7 +107,10 @@ const NoteData = (props) => {
                 <div className="error-message">{message}</div>
                 <hr></hr>
               </div>
-              <ViewExpense noteid={props.noteid}></ViewExpense>
+              <ViewExpense
+                noteid={props.noteid}
+                functionCall={getNewData}
+              ></ViewExpense>
             </div>
             <div className="modal-footer">
               <button

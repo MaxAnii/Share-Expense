@@ -14,7 +14,7 @@ const RoomList = (props) => {
   const [roomDetails, setRoomDeetails] = useState([]);
   const getRoom = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/getroom/${props.adminId}`,
+      `http://localhost:5000/user/getroom/${props.roomAdminId}`,
       {
         method: "GET",
         credentials: "include",
@@ -46,7 +46,7 @@ const RoomList = (props) => {
                     id={rowCount}
                     className="table-row room-row"
                     onClick={() => {
-                      Navigate(`/room/${elem.id}`);
+                      Navigate(`/room/${elem.id}/${elem.adminid}`);
                     }}
                   >
                     <td>
@@ -68,7 +68,10 @@ const RoomList = (props) => {
           </tbody>
         </table>
       </div>
-      <CreateRoom adminId={props.adminId} getRoom={getRoom}></CreateRoom>
+      <CreateRoom
+        roomAdminId={props.roomAdminId}
+        getRoom={getRoom}
+      ></CreateRoom>
     </>
   );
 };

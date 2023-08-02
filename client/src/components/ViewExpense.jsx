@@ -26,7 +26,7 @@ const ViewExpense = (props) => {
   };
   useEffect(() => {
     getExpense();
-  }, []);
+  }, [props.functionCall]);
   expenseData.map((elem) => {
     totalAmount += parseFloat(elem.amount);
   });

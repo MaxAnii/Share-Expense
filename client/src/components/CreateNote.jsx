@@ -7,7 +7,7 @@ const CreateNote = (props) => {
     id: uuidv4(),
     name: "",
     roomid: params.roomid,
-    adminid: props.adminId,
+    adminid: props.userid,
   });
   const [message, setMessage] = useState("");
   const [showConfrim, setShowConfrim] = useState(true);
@@ -32,7 +32,7 @@ const CreateNote = (props) => {
           name: "",
           adminId: props.adminId,
         });
-        // props.getNote();
+        props.getNote();
         setShowConfrim(false);
       } else setMessage("An error has occurred");
     }
@@ -73,6 +73,7 @@ const CreateNote = (props) => {
                 aria-label="Close"
                 onClick={() => {
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               ></button>
             </div>
@@ -104,6 +105,7 @@ const CreateNote = (props) => {
                 data-bs-dismiss="modal"
                 onClick={() => {
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               >
                 Close
