@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
+import RoomRequest from "./pages/RoomRequest";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -55,6 +56,10 @@ const App = () => {
           <Route
             path="/room/:roomid/:roomadminid"
             element={user ? <Room user={user} /> : <Landing />}
+          />
+          <Route
+            path="/home/roomrequest"
+            element={user ? <RoomRequest user={user} /> : <Landing />}
           />
         </Routes>
       </div>

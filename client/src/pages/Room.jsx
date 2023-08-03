@@ -10,7 +10,7 @@ const Room = ({ user }) => {
     <>
       <NoteList userid={user.id}></NoteList>
       {params.roomadminid === user.id ? (
-        <AddMember roomid={params.roomid}></AddMember>
+        <AddMember roomid={params.roomid} userid={user.id}></AddMember>
       ) : (
         ""
       )}
