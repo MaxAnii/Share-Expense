@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NoteData from "./NoteData";
 import CreateNote from "./CreateNote";
 const NoteList = (props) => {
+  const navigate = useNavigate();
   const params = useParams();
   const [noteList, setNoteList] = useState([]);
   const [message, setMessage] = useState("");
@@ -21,6 +22,17 @@ const NoteList = (props) => {
     );
     const data = await response.json();
     if (response.status === 200) {
+      // check wheather user belong to room or not
+      {
+        let flag = false;
+        data.map((elem) => {
+          if (elem.adminid === props.userid) flag = true;
+        });
+        if (!flag) {
+          navigate("/home");
+        }
+      }
+
       setNoteList(data);
     } else setMessage(data.message);
   };
