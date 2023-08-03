@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-// const logo = "./i"
+import Offcanvas from "./Offcanvas";
 const Navbar = ({ user }) => {
-  const logout = () => {
-    window.open("http://localhost:5000/auth/logout", "_self");
-  };
   return (
     <div className="navbar">
       <span className="logo">
@@ -16,8 +13,9 @@ const Navbar = ({ user }) => {
           <li className="listItem">
             <img src={user.image} alt="" className="avatar" />
           </li>
-          <li className="listItem log" onClick={logout}>
-            Logout
+
+          <li>
+            <Offcanvas></Offcanvas>
           </li>
         </ul>
       ) : (
