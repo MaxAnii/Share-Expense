@@ -17,9 +17,11 @@ const addRoom = async (req, res) => {
 const getRoom = async (req, res) => {
   try {
     const { userid } = req.params;
-    const reslut = await pool.query('SELECT * FROM "room" WHERE "adminid"=$1', [
-      userid,
-    ]);
+    const status = true;
+    const reslut = await pool.query(
+      'SELECT "id","name","description","adminid" FROM "room" WHERE "adminid"=$1 UNION SELECT  "id","name","description","adminid" FROM "room","roomMember" WHERE "id"="roomid" AND "memberid"=$2 AND "status"=$3',
+      [userid, userid, status]
+    );
     if (reslut.rows.length !== 0) {
       res.json(reslut.rows);
     } else {
@@ -94,4 +96,76 @@ const sendRequest = async (req, res) => {
   }
 };
 
-module.exports = { addRoom, getRoom, getMemberList, sendRequest };
+const ListRoomRequest = async (req, res) => {
+  const { userid } = req.params;
+  const status = false;
+  try {
+    const result = await pool.query(
+      'SELECT "name","description","memberid","roomid" FROM "room","roomMember" WHERE "roomid"="id" AND "status"=$1 AND "memberid"=$2',
+      [status, userid]
+    );
+    if (result.rows.length !== 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const acceptRequest = async (req, res) => {
+  try {
+    console.log("hhi");
+    const status = true;
+    const { roomid, userid } = req.body;
+    const result = await pool.query(
+      'UPDATE "roomMember" SET "status"=$1 WHERE "roomid"=$2 AND "memberid"=$3 RETURNING *',
+      [status, roomid, userid]
+    );
+    console.log(result.rows[0]);
+    if (result.rows.length !== 0) {
+      res.json({
+        status: 200,
+      });
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const rejectRequest = async (req, res) => {
+  try {
+    const { roomid, userid } = req.body;
+    const result = await pool.query(
+      'DELETE FROM "roomMember" WHERE "roomid"=$2 AND "userid"=$3 RETURNING *',
+      [roomid, userid]
+    );
+    if (result.rows.length !== 0) {
+      res.json({
+        status: 200,
+      });
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  addRoom,
+  getRoom,
+  getMemberList,
+  sendRequest,
+  ListRoomRequest,
+  acceptRequest,
+  rejectRequest,
+};

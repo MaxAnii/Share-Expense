@@ -6,6 +6,9 @@ const {
   getRoom,
   getMemberList,
   sendRequest,
+  ListRoomRequest,
+  acceptRequest,
+  rejectRequest,
 } = require("../controlllers/roomDetails");
 const { addNote, getNote } = require("../controlllers/noteDetails");
 const { addExpense, getExpense } = require("../controlllers/expenseDetails");
@@ -17,4 +20,6 @@ router.post("/addexpense", addExpense);
 router.get("/getexpense/:noteid", getExpense);
 router.get("/getmember/:username", getMemberList);
 router.post("/sendrequest", sendRequest);
+router.get("/roomrequest/:userid", ListRoomRequest);
+router.put("/acceptrequest", acceptRequest);
 module.exports = router;
