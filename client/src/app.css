@@ -141,7 +141,7 @@
   margin-right: 10px;
 }
 
-input{
+.input{
   width: 250px;
   padding: 15px 20px;
   margin-bottom: 20px;
@@ -224,6 +224,15 @@ border: 0px;
   border-radius: 19px;
   z-index: 2;
 }
+.add-member{
+  position: fixed;
+  bottom: 10px;
+  right: 90px;
+  height: 70px;
+  width: 70px;
+  border-radius: 19px;
+  z-index: 2;
+}
 .modal-header , .modal-footer{
   background-color: #001c30e5;
   color: white;
@@ -295,7 +304,12 @@ padding-top: 2vh;
  width: 200px;
  padding: 20px 0;
 }
-
+.table .user-info .member-name{
+text-align: center;
+padding-left: 10px;
+font-size: large;
+font-weight: 450;
+}
 .overflow-table{
 height: 40vh;
 overflow-x:hidden; 
@@ -303,4 +317,8 @@ overflow-x:hidden;
 }
 .row-gap{
   height: 1vh;
+}
+.add-btn{
+  background-color: white;
+  border: 0;
 }

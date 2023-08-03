@@ -22,7 +22,7 @@ const NoteList = (props) => {
     );
     const data = await response.json();
     if (response.status === 200) {
-      // check wheather user belong to room or not
+      // check whether user belong to room or not
       {
         let flag = false;
         data.map((elem) => {
