@@ -30,4 +30,23 @@ const getRoom = async (req, res) => {
   }
 };
 
-module.exports = { addRoom, getRoom };
+const getMemberList = async (req, res) => {
+  try {
+    const { username } = req.params;
+    console.log(username);
+    const result = await pool.query(
+      'SELECT "id","name","image" FROM "user" WHERE "name"=$1',
+      [username]
+    );
+    if (result.rows.length !== 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+module.exports = { addRoom, getRoom, getMemberList };
