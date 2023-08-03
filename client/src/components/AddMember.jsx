@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-const AddMember = () => {
+const AddMember = (props) => {
   const [userDetails, setUserDetails] = useState([]);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const searchMember = async (e) => {
+    setUserDetails([]);
     e.preventDefault();
     setMessage("");
     const response = await fetch(
@@ -27,6 +28,23 @@ const AddMember = () => {
       setUserDetails(data);
       setUsername("");
     }
+  };
+  const sendRequest = async (userid) => {
+    const response = await fetch("http://localhost:5000/user/sendrequest", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        roomid: props.roomid,
+        userid,
+      }),
+    });
+
+    const data = await response.json();
+    setMessage(data.message);
   };
   return (
     <div>
@@ -64,6 +82,8 @@ const AddMember = () => {
                 aria-label="Close"
                 onClick={() => {
                   setMessage("");
+                  setUserDetails([]);
+                  setUsername("");
                 }}
               ></button>
             </div>
@@ -78,6 +98,7 @@ const AddMember = () => {
                 <div className="input-group mb-3">
                   <input
                     type="text"
+                    required
                     className="form-control"
                     placeholder="Search by username"
                     value={username || ""}
@@ -112,35 +133,45 @@ const AddMember = () => {
                     {userDetails.map((elem) => {
                       return (
                         <>
-                          <tr>
-                            <td className="user-info">
-                              <img
-                                src={elem.image}
-                                alt="user-image"
-                                className="avatar"
-                              />
-                              <span className="member-name"> {elem.name}</span>
-                            </td>
+                          {elem.id !== props.userid ? ( //stopping user to send request to himself
+                            <tr>
+                              <td className="user-info">
+                                <img
+                                  src={elem.image}
+                                  alt="user-image"
+                                  className="avatar"
+                                />
+                                <span className="member-name">
+                                  {" "}
+                                  {elem.name}
+                                </span>
+                              </td>
 
-                            <td>
-                              <button className="add-btn">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="30"
-                                  height="50"
-                                  fill="currentColor"
-                                  class="bi bi-person-plus-fill"
-                                  viewBox="0 0 16 16"
+                              <td>
+                                <button
+                                  className="add-btn"
+                                  onClick={() => sendRequest(elem.id)}
                                 >
-                                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                  <path
-                                    fill-rule="evenodd"
-                                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                                  />
-                                </svg>
-                              </button>
-                            </td>
-                          </tr>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="30"
+                                    height="50"
+                                    fill="currentColor"
+                                    class="bi bi-person-plus-fill"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+                                    />
+                                  </svg>
+                                </button>
+                              </td>
+                            </tr>
+                          ) : (
+                            ""
+                          )}
                           <div className="row-gap"></div>
                         </>
                       );
@@ -156,6 +187,8 @@ const AddMember = () => {
                 data-bs-dismiss="modal"
                 onClick={() => {
                   setMessage("");
+                  setUserDetails([]);
+                  setUsername("");
                 }}
               >
                 Close
