@@ -3,7 +3,6 @@ import AcceptRequest from "./AcceptRequest";
 import RejectRequest from "./RejectRequest";
 
 const ListRoomRequest = (props) => {
-  console.log(props);
   const color = ["black", "dimgray", "darkgray", "silver", "gray"];
   var colorIndex = 0;
   const index = () => {
@@ -14,6 +13,7 @@ const ListRoomRequest = (props) => {
   const [requestList, setRequestList] = useState([]);
   const [message, setMessage] = useState("");
   const getRequestList = async () => {
+    console.log("hi");
     setMessage("");
     const response = await fetch(
       `http://localhost:5000/user/roomrequest/${props.userid}`,
@@ -63,12 +63,14 @@ const ListRoomRequest = (props) => {
                       <AcceptRequest
                         userid={elem.memberid}
                         roomid={elem.roomid}
+                        getRequestList={getRequestList}
                       ></AcceptRequest>
                     </td>
                     <td>
                       <RejectRequest
                         userid={elem.memberid}
                         roomid={elem.roomid}
+                        getRequestList={getRequestList}
                       ></RejectRequest>
                     </td>
                   </tr>

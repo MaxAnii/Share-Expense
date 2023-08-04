@@ -16,6 +16,7 @@ const AcceptRequest = (props) => {
       body: JSON.stringify(requestDetails),
     });
     const data = await response.json();
+    props.getRequestList();
     if (data.status === 200) alert("Room Added");
     else alert("Error");
   };

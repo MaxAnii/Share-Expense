@@ -1,8 +1,30 @@
 import React from "react";
-
-const RejectRequest = () => {
+import { useState } from "react";
+const RejectRequest = (props) => {
+  const [requestDetails, setRequestDetails] = useState({
+    roomid: props.roomid,
+    userid: props.userid,
+  });
+  const rejectRoomRequest = async () => {
+    const response = await fetch("http://localhost:5000/user/rejectrequest", {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        Accept: "Application/json",
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify(requestDetails),
+    });
+    const data = await response.json();
+    props.getRequestList();
+    if (data.status === 200) {
+      // alert("Rejected");
+    } else {
+      // alert("Error");
+    }
+  };
   return (
-    <button className="reject-btn">
+    <button className="reject-btn" onClick={rejectRoomRequest}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="39"
