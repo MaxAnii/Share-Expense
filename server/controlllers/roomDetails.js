@@ -118,7 +118,6 @@ const ListRoomRequest = async (req, res) => {
 
 const acceptRequest = async (req, res) => {
   try {
-    console.log("hhi");
     const status = true;
     const { roomid, userid } = req.body;
     const result = await pool.query(
@@ -142,10 +141,12 @@ const acceptRequest = async (req, res) => {
 const rejectRequest = async (req, res) => {
   try {
     const { roomid, userid } = req.body;
+    const status = false;
     const result = await pool.query(
-      'DELETE FROM "roomMember" WHERE "roomid"=$2 AND "userid"=$3 RETURNING *',
-      [roomid, userid]
+      'DELETE FROM "roomMember" WHERE "roomid"=$1 AND "memberid"=$2 AND "status"=$3 RETURNING *',
+      [roomid, userid, status]
     );
+
     if (result.rows.length !== 0) {
       res.json({
         status: 200,

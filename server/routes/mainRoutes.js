@@ -22,4 +22,5 @@ router.get("/getmember/:username", getMemberList);
 router.post("/sendrequest", sendRequest);
 router.get("/roomrequest/:userid", ListRoomRequest);
 router.put("/acceptrequest", acceptRequest);
+router.delete("/rejectrequest", rejectRequest);
 module.exports = router;
