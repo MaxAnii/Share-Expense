@@ -30,6 +30,7 @@ const Login = () => {
     <form onSubmit={localLogin}>
       <div className="right">
         <input
+          className="input"
           type="text"
           placeholder="Username"
           required
@@ -37,6 +38,7 @@ const Login = () => {
           onChange={(e) => setUser({ ...user, username: e.target.value })}
         />
         <input
+          className="input"
           type="text"
           placeholder="Password"
           required
