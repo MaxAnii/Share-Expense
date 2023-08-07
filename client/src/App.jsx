@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import RoomRequest from "./pages/RoomRequest";
+import NoteData from "./components/NoteData";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -60,6 +61,10 @@ const App = () => {
           <Route
             path="/home/roomrequest"
             element={user ? <RoomRequest user={user} /> : <Landing />}
+          />
+          <Route
+            path="/room/:roomid/:roomadminid/notedata/:noteid/:usernoteid"
+            element={user ? <NoteData user={user} /> : <Landing />}
           />
         </Routes>
       </div>

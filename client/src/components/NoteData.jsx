@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import ViewExpense from "./ViewExpense";
 import { v4 as uuid } from "uuid";
+import { useParams } from "react-router-dom";
 const NoteData = (props) => {
+  const params = useParams();
+  console.log(params);
   const [noteData, setNoteData] = useState({
-    noteid: props.noteid,
+    noteid: params.noteid,
     expenseid: uuid(),
     reason: "",
     amount: "",
@@ -38,7 +41,7 @@ const NoteData = (props) => {
   };
   return (
     <>
-      <button
+      {/* <button
         className="btn btn-primary"
         type="button"
         data-bs-target={`#myModal${props.noteid}`}
@@ -68,62 +71,62 @@ const NoteData = (props) => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
-            </div>
-            <div className="modal-body">
-              <div>
-                {props.usernoteid === props.userid ? (
-                  <form onSubmit={addExpense}>
-                    <div class="input-group mb-3 input-group-lg">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Reason Expense made for"
-                        value={noteData.reason}
-                        onChange={(e) => {
-                          setNoteData({ ...noteData, reason: e.target.value });
-                        }}
-                        required
-                      />
+            </div> */}
+      <div className="modal-body">
+        <div>
+          {props.usernoteid === props.userid ? (
+            <form onSubmit={addExpense}>
+              <div class="input-group mb-3 input-group-lg">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Reason Expense made for"
+                  value={noteData.reason}
+                  onChange={(e) => {
+                    setNoteData({ ...noteData, reason: e.target.value });
+                  }}
+                  required
+                />
 
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Amount you spend"
-                        aria-label="Server"
-                        value={noteData.amount}
-                        onChange={(e) => {
-                          setNoteData({ ...noteData, amount: e.target.value });
-                        }}
-                        required
-                      />
-                    </div>
-                    <button type="submit" class="btn btn-dark">
-                      Submit
-                    </button>
-                  </form>
-                ) : (
-                  ""
-                )}
-                <div className="error-message">{message}</div>
-                <hr></hr>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Amount you spend"
+                  aria-label="Server"
+                  value={noteData.amount}
+                  onChange={(e) => {
+                    setNoteData({ ...noteData, amount: e.target.value });
+                  }}
+                  required
+                />
               </div>
-              <ViewExpense
-                noteid={props.noteid}
-                functionCall={getNewData}
-              ></ViewExpense>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
+              <button type="submit" class="btn btn-dark">
+                Submit
               </button>
-            </div>
-          </div>
+            </form>
+          ) : (
+            ""
+          )}
+          <div className="error-message">{message}</div>
+          <hr></hr>
         </div>
+        <ViewExpense
+          noteid={params.noteid}
+          functionCall={getNewData}
+        ></ViewExpense>
       </div>
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+      {/* </div>
+        </div>
+      </div> */}
     </>
   );
 };

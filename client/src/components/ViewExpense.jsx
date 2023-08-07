@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const ViewExpense = (props) => {
+  console.log(props);
   var totalAmount = 0;
   const [expenseData, setExpenseData] = useState([]);
   const [message, setMessage] = useState("");

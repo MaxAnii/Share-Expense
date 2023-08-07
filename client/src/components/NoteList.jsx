@@ -23,15 +23,16 @@ const NoteList = (props) => {
     const data = await response.json();
     if (response.status === 200) {
       // check whether user belong to room or not
-      {
-        let flag = false;
-        data.map((elem) => {
-          if (elem.adminid === props.userid) flag = true;
-        });
-        if (!flag) {
-          navigate("/home");
-        }
-      }
+      // {
+      //   let flag = false;
+      //   data.map((elem) => {
+      //     if (elem.adminid === props.userid || elem.memberid === props.userid)
+      //       flag = true;
+      //   });
+      //   if (!flag) {
+      //     navigate("/home");
+      //   }
+      // }
 
       setNoteList(data);
     } else setMessage(data.message);
@@ -39,6 +40,7 @@ const NoteList = (props) => {
   useEffect(() => {
     getNote();
   }, []);
+
   return (
     <>
       <CreateNote userid={props.userid} getNote={getNote}></CreateNote>
@@ -52,13 +54,22 @@ const NoteList = (props) => {
                     <h5 className="card-title">
                       {elem.noteName.toUpperCase()}
                     </h5>
-                    <NoteData
+                    <button
+                      onClick={() => {
+                        navigate(
+                          `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}`
+                        );
+                      }}
+                    >
+                      open
+                    </button>
+                    {/* <NoteData
                       noteid={elem.id}
                       name={elem.noteName}
                       usernoteid={elem.adminid}
                       roomAdminId={params.roomadminId}
                       userid={props.userid}
-                    ></NoteData>
+                    ></NoteData> */}
                   </div>
                   <div className="card-footer">
                     <small className="text-body-secondary">
