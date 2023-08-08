@@ -11,7 +11,12 @@ const {
   rejectRequest,
 } = require("../controlllers/roomDetails");
 const { addNote, getNote } = require("../controlllers/noteDetails");
-const { addExpense, getExpense } = require("../controlllers/expenseDetails");
+const {
+  addExpense,
+  getExpense,
+  deleteExpense,
+  updateExpense,
+} = require("../controlllers/expenseDetails");
 router.post("/addroom", addRoom);
 router.get("/getroom/:userid", getRoom);
 router.post("/addnote", addNote);
@@ -23,4 +28,6 @@ router.post("/sendrequest", sendRequest);
 router.get("/roomrequest/:userid", ListRoomRequest);
 router.put("/acceptrequest", acceptRequest);
 router.delete("/rejectrequest", rejectRequest);
+router.delete("/deleteexpense/:noteid/:expenseid", deleteExpense);
+router.put("/updateexpense", updateExpense);
 module.exports = router;
