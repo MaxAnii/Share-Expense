@@ -46,7 +46,7 @@ const RoomList = (props) => {
                     id={rowCount}
                     className="table-row room-row"
                     onClick={() => {
-                      Navigate(`/room/${elem.id}/${elem.adminid}`);
+                      Navigate(`/room/${elem.name}/${elem.id}/${elem.adminid}`);
                     }}
                   >
                     <td>

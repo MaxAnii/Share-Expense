@@ -55,7 +55,7 @@ const App = () => {
             element={user ? <Home user={user} /> : <Landing />}
           />
           <Route
-            path="/room/:roomid/:roomadminid"
+            path="/room/:roomname/:roomid/:roomadminid"
             element={user ? <Room user={user} /> : <Landing />}
           />
           <Route
