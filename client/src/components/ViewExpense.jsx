@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+import EditExpense from "./EditExpense";
+import DeleteExpense from "./DeleteExpense";
+import { useParams } from "react-router-dom";
 
 const ViewExpense = (props) => {
-  console.log(props);
+  const params = useParams();
   var totalAmount = 0;
   const [expenseData, setExpenseData] = useState([]);
   const [message, setMessage] = useState("");
 
   const getExpense = async () => {
+    setExpenseData([]);
     const response = await fetch(
       `http://localhost:5000/user/getexpense/${props.noteid}`,
       {
@@ -54,6 +58,24 @@ const ViewExpense = (props) => {
                     </td>
                     <td className="reason-cell ">{elem.reason}</td>
                     <td>{elem.amount}</td>
+                    {props.loginUser === params.usernoteid ? (
+                      <td>
+                        <div className="expense-option">
+                          <DeleteExpense
+                            expenseid={elem.expenseid}
+                            getExpense={getExpense}
+                          ></DeleteExpense>
+                          <EditExpense
+                            expenseid={elem.expenseid}
+                            reason={elem.reason}
+                            amount={elem.amount}
+                            getExpense={getExpense}
+                          ></EditExpense>
+                        </div>
+                      </td>
+                    ) : (
+                      ""
+                    )}
                   </tr>
                   <div className="row-gap"></div>
                 </>

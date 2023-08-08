@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ViewExpense from "./ViewExpense";
 import { v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
-const NoteData = (props) => {
+const NoteData = ({ user }) => {
   const params = useParams();
-  console.log(params);
   const [noteData, setNoteData] = useState({
     noteid: params.noteid,
+    roomid: params.roomid,
     expenseid: uuid(),
     reason: "",
     amount: "",
@@ -30,10 +30,11 @@ const NoteData = (props) => {
       setGetNewData(!getNewData);
       setMessage("Expense added");
       setNoteData({
-        noteid: props.noteid,
+        noteid: params.noteid,
         expenseid: uuid(),
         reason: "",
         amount: "",
+        roomid: params.roomid,
       });
     } else {
       setMessage("An error has occurred try again");
@@ -41,41 +42,12 @@ const NoteData = (props) => {
   };
   return (
     <>
-      {/* <button
-        className="btn btn-primary"
-        type="button"
-        data-bs-target={`#myModal${props.noteid}`}
-        data-bs-toggle="modal"
-      >
-        Open
-      </button>
+      <div className="note-data">
+        <h3 className="note-name">{params.notename.toLocaleUpperCase()}</h3>
 
-      <div
-        className="modal fade"
-        id={`myModal${props.noteid}`}
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-xl modal-dialog-scrollable">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                {props.name.toUpperCase()}
-              </h1>
-              <button
-                type="button"
-                className="btn-close modal-close-btn"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div> */}
-      <div className="modal-body">
         <div>
-          {props.usernoteid === props.userid ? (
-            <form onSubmit={addExpense}>
+          {params.usernoteid === user.id ? (
+            <form onSubmit={addExpense} className="form">
               <div class="input-group mb-3 input-group-lg">
                 <input
                   type="text"
@@ -100,7 +72,7 @@ const NoteData = (props) => {
                   required
                 />
               </div>
-              <button type="submit" class="btn btn-dark">
+              <button type="submit" className="btn btn-dark add-expense-btn">
                 Submit
               </button>
             </form>
@@ -108,25 +80,13 @@ const NoteData = (props) => {
             ""
           )}
           <div className="error-message">{message}</div>
-          <hr></hr>
         </div>
         <ViewExpense
+          loginUser={user.id}
           noteid={params.noteid}
           functionCall={getNewData}
         ></ViewExpense>
       </div>
-      <div className="modal-footer">
-        <button
-          type="button"
-          className="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Close
-        </button>
-      </div>
-      {/* </div>
-        </div>
-      </div> */}
     </>
   );
 };

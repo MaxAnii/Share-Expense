@@ -57,7 +57,7 @@ const NoteList = (props) => {
                     <button
                       onClick={() => {
                         navigate(
-                          `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}`
+                          `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}/${elem.noteName}`
                         );
                       }}
                     >

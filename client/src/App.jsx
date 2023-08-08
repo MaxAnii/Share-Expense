@@ -63,7 +63,7 @@ const App = () => {
             element={user ? <RoomRequest user={user} /> : <Landing />}
           />
           <Route
-            path="/room/:roomid/:roomadminid/notedata/:noteid/:usernoteid"
+            path="/room/:roomid/:roomadminid/notedata/:noteid/:usernoteid/:notename"
             element={user ? <NoteData user={user} /> : <Landing />}
           />
         </Routes>
