@@ -1,7 +1,8 @@
 import React from "react";
 import RoomMemberList from "./RoomMemberList";
+import LeaveRoom from "./LeaveRoom";
 
-const RoomOption = () => {
+const RoomOption = (props) => {
   return (
     <>
       <div class="btn-group">
@@ -35,7 +36,7 @@ const RoomOption = () => {
 
           <li>
             <div class="option-item">
-              <button className="btn leave-room">Leave Room</button>
+              <LeaveRoom userid={props.userid}></LeaveRoom>
             </div>
           </li>
         </ul>
