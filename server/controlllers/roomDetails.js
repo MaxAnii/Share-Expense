@@ -52,6 +52,25 @@ const getMemberList = async (req, res) => {
     console.log(error.message);
   }
 };
+const getRoomMemberList = async (req, res) => {
+  try {
+    const { roomid } = req.params;
+    const status = true;
+    const result = await pool.query(
+      'SELECT "id","name","image" FROM "user" WHERE "id" IN (SELECT "adminid" FROM "room" WHERE "id"=$1 UNION SELECT "memberid" FROM "roomMember" WHERE "roomid"=$1 AND "status"=$2)',
+      [roomid, status]
+    );
+    if (result.rows.length !== 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 const sendRequest = async (req, res) => {
   try {
@@ -227,4 +246,5 @@ module.exports = {
   rejectRequest,
   leaveRoom,
   DeleteRoom,
+  getRoomMemberList,
 };

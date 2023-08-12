@@ -11,6 +11,7 @@ const {
   rejectRequest,
   leaveRoom,
   DeleteRoom,
+  getRoomMemberList,
 } = require("../controlllers/roomDetails");
 const { addNote, getNote } = require("../controlllers/noteDetails");
 const {
@@ -21,6 +22,7 @@ const {
 } = require("../controlllers/expenseDetails");
 router.post("/addroom", addRoom);
 router.get("/getroom/:userid", getRoom);
+router.get("/roommemberlist/:roomid", getRoomMemberList);
 router.post("/addnote", addNote);
 router.get("/getnote/:roomid", getNote);
 router.post("/addexpense", addExpense);
