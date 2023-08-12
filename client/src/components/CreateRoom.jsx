@@ -5,7 +5,7 @@ const CreateRoom = (props) => {
     id: uuidv4(),
     name: "",
     desc: "",
-    adminId: props.roomAdminId,
+    adminId: props.userid,
   });
   const [message, setMessage] = useState("");
   const [showConfrim, setShowConfrim] = useState(true);

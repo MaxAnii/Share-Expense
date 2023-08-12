@@ -3,18 +3,21 @@ import CreateRoom from "./CreateRoom";
 import { Link, useNavigate } from "react-router-dom";
 
 const RoomList = (props) => {
+  console.log(props);
   const color = ["black", "dimgray", "darkgray", "silver", "gray"];
   var colorIndex = 0;
+
   const index = () => {
     colorIndex++;
     if (colorIndex >= color.length) colorIndex = 0;
     return colorIndex;
   };
-  var rowCount = 1;
+  const [message, setMessage] = useState("");
   const [roomDetails, setRoomDeetails] = useState([]);
   const getRoom = async () => {
+    setMessage("loading...");
     const response = await fetch(
-      `http://localhost:5000/user/getroom/${props.roomAdminId}`,
+      `http://localhost:5000/user/getroom/${props.userid}`,
       {
         method: "GET",
         credentials: "include",
@@ -24,10 +27,12 @@ const RoomList = (props) => {
         },
       }
     );
-    if (response.status === 400) return;
+    const data = await response.json();
+    console.log(data);
+    if (data.status === 400) setMessage("Create a room");
     else {
-      const data = await response.json();
       setRoomDeetails(data);
+      setMessage("");
     }
   };
   const Navigate = useNavigate();
@@ -37,13 +42,17 @@ const RoomList = (props) => {
   return (
     <>
       <div className="room-table">
+        {message.length ? (
+          <div className="room-list-details">{message}</div>
+        ) : (
+          ""
+        )}
         <table className="table table-light  table-hover">
           <tbody>
             {roomDetails.map((elem) => {
               return (
                 <>
                   <tr
-                    id={rowCount}
                     className="table-row room-row"
                     onClick={() => {
                       Navigate(`/room/${elem.name}/${elem.id}/${elem.adminid}`);
@@ -68,10 +77,7 @@ const RoomList = (props) => {
           </tbody>
         </table>
       </div>
-      <CreateRoom
-        roomAdminId={props.roomAdminId}
-        getRoom={getRoom}
-      ></CreateRoom>
+      <CreateRoom userid={props.userid} getRoom={getRoom}></CreateRoom>
     </>
   );
 };

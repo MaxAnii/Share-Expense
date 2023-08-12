@@ -13,8 +13,8 @@ const ListRoomRequest = (props) => {
   const [requestList, setRequestList] = useState([]);
   const [message, setMessage] = useState("");
   const getRequestList = async () => {
-    console.log("hi");
-    setMessage("");
+    setRequestList([]);
+    setMessage("Loading...");
     const response = await fetch(
       `http://localhost:5000/user/roomrequest/${props.userid}`,
       {
@@ -31,6 +31,7 @@ const ListRoomRequest = (props) => {
     if (data.status === 400) {
       setMessage("No new request");
     } else {
+      setMessage("");
       setRequestList(data);
     }
   };
@@ -41,6 +42,11 @@ const ListRoomRequest = (props) => {
   return (
     <>
       <div className="room-table">
+        {message.length ? (
+          <div className="room-list-details">{message}</div>
+        ) : (
+          ""
+        )}
         <table className="table table-light  table-hover">
           <tbody>
             {requestList.map((elem) => {
