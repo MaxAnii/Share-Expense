@@ -1,8 +1,12 @@
 import React from "react";
 import RoomMemberList from "./RoomMemberList";
 import LeaveRoom from "./LeaveRoom";
+import { useParams } from "react-router-dom";
+import DeleteRoom from "./DeleteRoom";
 
 const RoomOption = (props) => {
+  const params = useParams();
+
   return (
     <>
       <div class="btn-group">
@@ -36,7 +40,11 @@ const RoomOption = (props) => {
 
           <li>
             <div class="option-item">
-              <LeaveRoom userid={props.userid}></LeaveRoom>
+              {params.roomadminid === props.userid ? (
+                <DeleteRoom></DeleteRoom>
+              ) : (
+                <LeaveRoom userid={props.userid}></LeaveRoom>
+              )}
             </div>
           </li>
         </ul>

@@ -1,15 +1,13 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-const LeaveRoom = (props) => {
+const DeleteRoom = () => {
   const params = useParams();
   const navigate = useNavigate();
   const roomDetails = {
-    userid: props.userid,
     roomid: params.roomid,
   };
-  const leaveRoom = async () => {
-    const response = await fetch("http://localhost:5000/user/leaveroom", {
+  const deleteRoom = async () => {
+    const response = await fetch("http://localhost:5000/user/deleteroom", {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -27,11 +25,10 @@ const LeaveRoom = (props) => {
   };
   return (
     <>
-      <button className="btn leave-room" onClick={leaveRoom}>
-        Leave Room
+      <button className="btn leave-room" onClick={deleteRoom}>
+        DeleteRoom
       </button>
     </>
   );
 };
-
-export default LeaveRoom;
+export default DeleteRoom;
