@@ -354,11 +354,12 @@ overflow-x:hidden;
   
 }
 .room-name{
-  margin:3px 20px;
-  display: flex;
+  margin:5px 20px;
 }
 .room-option{
-  margin-left: 90vw;
+ position: absolute;
+ top: 20vh;
+ right: 10px;
 }
 
 .leave-room{
@@ -376,23 +377,37 @@ overflow-x:hidden;
 .option-item{
   margin: 2px;
   border-radius:10px ;
+  text-align: center;
+  font-size: initial;
 }
 .option-item:hover{
   background-color:rgb(248, 248, 248);
 }
 .room-list-details{
   text-align: center;
-
 font-size:5rem;
 padding-top: 20vh;
 color:lightgray
 }
-.loginTitle{
+/* .loginTitle{
   position: absolute;
   top: 150px;
   color:lightgray
-}
+} */
 
+.drop-menu{
+background: whitesmoke;
+  border: #001C30 1px solid;
+  border-radius: 10px;
+  position: absolute;
+  top: 50px;
+  right: 0.5vw;
+}
+.drop-menu-list {
+list-style: none;
+  padding-left: 0rem;
+  padding-right: 1rem;
+}
 
 @media screen and (max-width: 992px) {
   .wrapper {
@@ -426,10 +441,6 @@ color:lightgray
 
 .table  .date-cell{
   width: 35vw;
-}
-
-.room-option{
-  margin-left: 60vw;
 }
 
 }

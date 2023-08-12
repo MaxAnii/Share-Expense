@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RoomMemberList from "./RoomMemberList";
 import LeaveRoom from "./LeaveRoom";
 import { useParams } from "react-router-dom";
@@ -6,15 +6,13 @@ import DeleteRoom from "./DeleteRoom";
 
 const RoomOption = (props) => {
   const params = useParams();
-
+  const [show, setShow] = useState(false);
   return (
     <>
       <div class="btn-group">
         <button
           className="edit-btn btn btn-outline-dark"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+          onClick={() => setShow(!show)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -31,23 +29,25 @@ const RoomOption = (props) => {
           </svg>
         </button>
 
-        <ul class="dropdown-menu">
-          <li>
-            <div class="option-item">
-              <RoomMemberList></RoomMemberList>
-            </div>
-          </li>
+        {show ? (
+          <div className="drop-menu">
+            <ul className="drop-menu-list">
+              <li class="option-item">
+                <RoomMemberList></RoomMemberList>
+              </li>
 
-          <li>
-            <div class="option-item">
-              {params.roomadminid === props.userid ? (
-                <DeleteRoom></DeleteRoom>
-              ) : (
-                <LeaveRoom userid={props.userid}></LeaveRoom>
-              )}
-            </div>
-          </li>
-        </ul>
+              <li class="option-item">
+                {params.roomadminid === props.userid ? (
+                  <DeleteRoom></DeleteRoom>
+                ) : (
+                  <LeaveRoom userid={props.userid}></LeaveRoom>
+                )}
+              </li>
+            </ul>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );

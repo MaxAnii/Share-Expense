@@ -11,9 +11,9 @@ const Room = ({ user }) => {
     <>
       <div className="room-name">
         <h3>{params.roomname.toUpperCase()}</h3>
-        <div className="room-option">
-          <RoomOption userid={user.id}></RoomOption>
-        </div>
+      </div>
+      <div className="room-option">
+        <RoomOption userid={user.id}></RoomOption>
       </div>
       <hr></hr>
       <NoteList userid={user.id}></NoteList>
