@@ -160,6 +160,28 @@ const rejectRequest = async (req, res) => {
     console.log(error.message);
   }
 };
+const leaveRoom = async (req, res) => {
+  try {
+    const { roomid, userid } = req.body;
+
+    const result = await pool.query(
+      'DELETE FROM "roomMember" WHERE "roomid"=$1 AND "memberid"=$2 RETURNING *',
+      [roomid, userid]
+    );
+
+    if (result.rows.length !== 0) {
+      res.json({
+        status: 200,
+      });
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 module.exports = {
   addRoom,
@@ -169,4 +191,5 @@ module.exports = {
   ListRoomRequest,
   acceptRequest,
   rejectRequest,
+  leaveRoom,
 };
