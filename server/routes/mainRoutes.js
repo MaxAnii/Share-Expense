@@ -10,6 +10,7 @@ const {
   acceptRequest,
   rejectRequest,
   leaveRoom,
+  DeleteRoom,
 } = require("../controlllers/roomDetails");
 const { addNote, getNote } = require("../controlllers/noteDetails");
 const {
@@ -32,4 +33,5 @@ router.delete("/rejectrequest", rejectRequest);
 router.delete("/deleteexpense/:noteid/:expenseid", deleteExpense);
 router.put("/updateexpense", updateExpense);
 router.delete("/leaveroom", leaveRoom);
+router.delete("/deleteroom", DeleteRoom);
 module.exports = router;
