@@ -1,6 +1,29 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 const RoomMemberList = () => {
+  const params = useParams();
+  const [memberDetails, setMemberDetails] = useState([]);
+  const [message, setMessage] = useState("");
+  const getMemberList = async () => {
+    setMessage("");
+    const response = await fetch(
+      `http://localhost:5000/user/roommemberlist/${params.roomid}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (data.status === 400) {
+      setMessage("error");
+    } else {
+      setMemberDetails(data);
+    }
+  };
   return (
     <div>
       <button
@@ -8,6 +31,7 @@ const RoomMemberList = () => {
         class="edit-btn"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
+        onClick={getMemberList}
       >
         Member List
       </button>
@@ -34,7 +58,42 @@ const RoomMemberList = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
+            <div class="modal-body">
+              <div className="overflow-table">
+                <table class="table">
+                  <thead>
+                    <tr></tr>
+                  </thead>
+                  <tbody>
+                    {memberDetails.map((elem) => {
+                      return (
+                        <>
+                          <tr>
+                            <td className="user-info">
+                              <img
+                                src={elem.image}
+                                alt="user-image"
+                                className="avatar"
+                              />
+                              <span className="member-name">
+                                {" "}
+                                {elem.name}
+                                {elem.id === params.roomadminid ? (
+                                  <p>Admin</p>
+                                ) : (
+                                  ""
+                                )}
+                              </span>
+                            </td>
+                          </tr>
+                          <div className="row-gap"></div>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
