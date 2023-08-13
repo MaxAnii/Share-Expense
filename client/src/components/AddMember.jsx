@@ -128,7 +128,7 @@ const AddMember = (props) => {
               </form>
 
               <p className="error-message"> {message}</p>
-              <div className="overflow-table">
+              <div className=".overflow-member-table">
                 <table class="table">
                   <thead>
                     <tr></tr>
@@ -142,7 +142,7 @@ const AddMember = (props) => {
                               <td className="user-info">
                                 <img
                                   src={elem.image}
-                                  alt="user-image"
+                                  alt="user-icon"
                                   className="avatar"
                                 />
                                 <span className="member-name">
@@ -159,7 +159,7 @@ const AddMember = (props) => {
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="30"
-                                    height="50"
+                                    height="65"
                                     fill="currentColor"
                                     class="bi bi-person-plus-fill"
                                     viewBox="0 0 16 16"

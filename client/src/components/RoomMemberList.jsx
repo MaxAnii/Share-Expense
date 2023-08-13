@@ -45,7 +45,7 @@ const RoomMemberList = () => {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel">
@@ -53,13 +53,13 @@ const RoomMemberList = () => {
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                class="btn-close modal-close-btn"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
             <div class="modal-body">
-              <div className="overflow-table">
+              <div className=".overflow-member-table">
                 <table class="table">
                   <thead>
                     <tr></tr>
@@ -72,7 +72,7 @@ const RoomMemberList = () => {
                             <td className="user-info">
                               <img
                                 src={elem.image}
-                                alt="user-image"
+                                alt="user-icon"
                                 className="avatar"
                               />
                               <span className="member-name">
@@ -101,9 +101,6 @@ const RoomMemberList = () => {
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Understood
               </button>
             </div>
           </div>

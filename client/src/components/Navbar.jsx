@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Offcanvas from "./Offcanvas";
 const Navbar = ({ user }) => {
+  const navigate = useNavigate();
   return (
     <div className="navbar">
       <span className="logo">
@@ -11,7 +12,12 @@ const Navbar = ({ user }) => {
       {user ? (
         <ul className="list">
           <li className="listItem">
-            <img src={user.image} alt="" className="avatar" />
+            <img
+              src={user.image}
+              alt=""
+              className="avatar"
+              onClick={() => navigate("/home/personalinformation")}
+            />
           </li>
 
           <li>
@@ -19,8 +25,8 @@ const Navbar = ({ user }) => {
           </li>
         </ul>
       ) : (
-        <Link className="link log" to="login">
-          Login
+        <Link className="link login-link" to="login">
+          Sign Up / Log In
         </Link>
       )}
     </div>
