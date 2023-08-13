@@ -74,13 +74,12 @@ const getRoomMemberList = async (req, res) => {
 
 const sendRequest = async (req, res) => {
   try {
-    console.log(req.body);
     const { roomid, userid } = req.body;
     const status = false;
     let result;
     result = await pool.query(
-      'SELECT * FROM "roomMember" WHERE "roomid"=$1 AND "memberid"=$2 AND "status"=$3',
-      [roomid, userid, status]
+      'SELECT * FROM "roomMember" WHERE "roomid"=$1 AND "memberid"=$2 ',
+      [roomid, userid]
     );
     if (result.rows.length === 0) {
       result = await pool.query(
