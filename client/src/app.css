@@ -329,11 +329,18 @@ overflow-x:hidden;
 .menu-item{
   margin-left: -43px;
   padding: 20px;
-  background-color: rgba(104, 104, 104, 0.164);
   list-style: none;
   border-radius: 15px;
   width: 370px;
+  background-color: #ffffff;
+  border-bottom: 1px solid;
 }
+.menu-item:hover{
+  background-color: rgba(104, 104, 104, 0.164);
+}
+
+
+
 .note-data{
   margin: 5px;
 }

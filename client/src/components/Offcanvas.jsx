@@ -57,6 +57,7 @@ const Offcanvas = () => {
               >
                 Home
               </li>
+              <div className="divide-menu-item"></div>
               <li
                 className="menu-item"
                 onClick={() => Navigate("/home/roomrequest")}
@@ -73,7 +74,6 @@ const Offcanvas = () => {
           </li>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };
