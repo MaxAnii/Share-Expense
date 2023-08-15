@@ -6,6 +6,7 @@ const Login = () => {
   });
 
   const localLogin = async (e) => {
+    console.log(user);
     fetch("http://localhost:5000/auth/login", {
       method: "POST",
       headers: {

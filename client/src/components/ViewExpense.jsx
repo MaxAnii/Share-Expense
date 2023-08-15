@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import EditExpense from "./EditExpense";
 import DeleteExpense from "./DeleteExpense";
 import { useParams } from "react-router-dom";
+import DateFilter from "./DateFilter";
 
 const ViewExpense = (props) => {
   const params = useParams();
   var totalAmount = 0;
   const [expenseData, setExpenseData] = useState([]);
   const [message, setMessage] = useState("");
-
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const getExpense = async () => {
     setExpenseData([]);
     const response = await fetch(
@@ -42,7 +44,18 @@ const ViewExpense = (props) => {
         <div>{totalAmount}</div>
       </div>
       <hr></hr>
-      <h5>All Expenses</h5>
+      <div className="date-container">
+        <h5>View Expenses</h5>
+        <div className="date-section">
+          <DateFilter
+            getExpense={getExpense}
+            fromDate={fromDate}
+            toDate={toDate}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
+          ></DateFilter>
+        </div>
+      </div>
       <div className="overflow-table">
         <table class="table table-striped table-borderless">
           <thead>

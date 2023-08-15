@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ViewExpense from "./ViewExpense";
+import ViewExpense from "../components/ViewExpense";
 import { v4 as uuid } from "uuid";
 import { useParams } from "react-router-dom";
 const NoteData = ({ user }) => {

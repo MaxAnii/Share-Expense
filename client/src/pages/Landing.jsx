@@ -8,10 +8,15 @@ const Landing = () => {
         <h1>Welcome to ShareExpense Hub</h1>
         <p className="typewriter">
           <Typewriter
-            words={["Create a Room", "Share Expenses", "Stay Organized"]}
+            words={[
+              "Create a Room",
+              "Add friends",
+              "Share Expenses",
+              "Stay Organized",
+            ]}
             cursor
             loop={true}
-            cursorStyle="**"
+            cursorStyle="|"
             typeSpeed={70}
             deleteSpeed={50}
             delaySpeed={1000}

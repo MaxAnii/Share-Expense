@@ -521,6 +521,19 @@ list-style: none;
   padding-left: 0rem;
   padding-right: 1rem;
 }
+.date-container{
+  margin: 3px;
+  display: flex;
+  justify-content: space-between;
+}
+.date-section{
+  align-self: start;
+  display: flex;
+  margin-bottom: 3vh;
+}
+
+
+
 
 @media screen and (max-width: 992px) {
   .wrapper {
@@ -558,5 +571,7 @@ list-style: none;
 .room-creation ,.footer,.features{
   padding: 3vh;
 }
-
+.date-section{
+display: block;
+}
 }

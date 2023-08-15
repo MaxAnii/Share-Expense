@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
-import NoteData from "./NoteData";
+import NoteData from "../pages/NoteData";
 import CreateNote from "./CreateNote";
 const NoteList = (props) => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import RoomRequest from "./pages/RoomRequest";
-import NoteData from "./components/NoteData";
+import NoteData from "./pages/NoteData";
 import PersonalInformation from "./pages/PersonalInformation";
 
 const App = () => {
@@ -36,7 +36,7 @@ const App = () => {
   useEffect(() => {
     getUser();
   }, []);
-
+  console.log(user);
   return (
     <BrowserRouter>
       <div>
