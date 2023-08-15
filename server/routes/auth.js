@@ -73,6 +73,7 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/login/failed" }),
   function (req, res) {
     // Successful authentication, redirect home.
+    console.log(req.user);
     req.session.user = req.user;
     res.redirect("http://localhost:3000");
   }

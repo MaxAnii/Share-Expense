@@ -41,8 +41,9 @@ passport.use(
           message: "Incorrect username or password.",
         });
       }
+      console.log(result.rows[0]);
       const user = {
-        id: result.rowa[0].id,
+        id: result.rows[0].id,
         email: result.rows[0].email,
         name: result.rows[0].name,
         image: result.rows[0].image,
