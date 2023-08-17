@@ -6,10 +6,15 @@ const DateFilter = (props) => {
   const year = dateArray[2];
   const month = dateArray[1];
   const day = dateArray[0];
+  var firstDay = new Date(year, month, 1);
   const toDate = year + "-" + month + "-" + day;
-  const fromDate = year;
-  props.setToDate(dateFormate());
+  const dayFirst = "1";
+  const from2 =
+    year.toString() + "-" + month.toString() + "-" + dayFirst.toString();
 
+  const fromDate = year + "-" + month + "-" + dayFirst;
+  props.setToDate(toDate);
+  props.setFromDate(firstDay);
   return (
     <>
       <div class="input-group">
@@ -19,6 +24,7 @@ const DateFilter = (props) => {
           aria-label="First name"
           class="form-control"
           onChange={(e) => alert(e.target.value)}
+          value={props.fromDate}
         />
       </div>
       <div class="input-group">
