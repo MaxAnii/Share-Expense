@@ -14,7 +14,7 @@ const ViewExpense = (props) => {
   const getExpense = async () => {
     setExpenseData([]);
     const response = await fetch(
-      `http://localhost:5000/user/getexpense/${props.noteid}`,
+      `http://localhost:5000/user/getexpense/${props.noteid}/${fromDate}/${toDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -33,7 +33,7 @@ const ViewExpense = (props) => {
   };
   useEffect(() => {
     getExpense();
-  }, [props.functionCall]);
+  }, [props.functionCall, fromDate, toDate]);
   expenseData.map((elem) => {
     totalAmount += parseFloat(elem.amount);
   });
