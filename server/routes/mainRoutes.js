@@ -26,7 +26,7 @@ router.get("/roommemberlist/:roomid", getRoomMemberList);
 router.post("/addnote", addNote);
 router.get("/getnote/:roomid", getNote);
 router.post("/addexpense", addExpense);
-router.get("/getexpense/:noteid", getExpense);
+router.get("/getexpense/:noteid/:fromdate/:todate", getExpense);
 router.get("/getmember/:username", getMemberList);
 router.post("/sendrequest", sendRequest);
 router.get("/roomrequest/:userid", ListRoomRequest);

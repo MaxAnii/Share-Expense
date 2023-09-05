@@ -25,10 +25,11 @@ const addExpense = async (req, res) => {
 
 const getExpense = async (req, res) => {
   try {
-    const { noteid } = req.params;
+    const { noteid, fromdate, todate } = req.params;
+    console.log(req.params);
     const result = await pool.query(
-      'SELECT * FROM "expense" WHERE "noteid"=$1 ORDER BY "expensedate" DESC ',
-      [noteid]
+      'SELECT * FROM "expense" WHERE "noteid"=$1 AND "expensedate" BETWEEN $2 AND $3 ORDER BY "expensedate" DESC ',
+      [noteid, fromdate, todate]
     );
     if (result.rows.length !== 0) {
       res.json(result.rows);
