@@ -1,7 +1,7 @@
 import React from "react";
 
 const PersonalInformation = () => {
-  return <div>PersonalInformation</div>;
+  return <div className="form-container"></div>;
 };
 
 export default PersonalInformation;
