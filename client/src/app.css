@@ -252,7 +252,7 @@ font-size: x-large;
 
 .submit{
   width: 200px;
-
+  
   background-color: #001C30;
   color: white;
   font-weight: bold;
@@ -278,9 +278,9 @@ font-size: x-large;
   margin-left: 5px;
   background-color: white;
   text-decoration: underline;
-border: 0px;
+  border: 0px;
   padding: 5px;
-
+  
 }
 .error-message{
   color: #df4930;
@@ -326,7 +326,7 @@ border: 0px;
   -moz-box-shadow: 0px 5px 33px -21px rgb(4, 4, 5);
   box-shadow: 0px 5px 33px -21px rgb(0, 0, 0);
   border-radius: 20px;
-
+  
 }
 .room-image{
   margin-left: 5vw;
@@ -338,7 +338,7 @@ border: 0px;
   text-align: center;
   font-size: 30px;
   font-family: 'monospace';
- 
+  
   border: #0D7377 solid 2px;
   font-weight: bold;
   color: azure;
@@ -354,15 +354,15 @@ border: 0px;
 .room-row:hover>td{
   translate: 5px 5px;
   transform: scale(4px,4px);
-color: #ee2603;
-
+  color: #ee2603;
+  
 }
 
 .total-expense{
   margin-top: 10px;
   height: 10vh;
   padding: 100px;
-padding-top: 2vh;
+  padding-top: 2vh;
   background-color: #001C30;
   color: aliceblue;
   border-radius: 30px;
@@ -373,28 +373,28 @@ padding-top: 2vh;
 
 .table  .date-cell{
   background-color: #001C30;
- border-radius: 30px;
- color: wheat;
- font-size:large;
- padding: 20px 0;
- text-align: center;
- width: 20vw;
+  border-radius: 30px;
+  color: wheat;
+  font-size:large;
+  padding: 20px 0;
+  text-align: center;
+  width: 20vw;
 }
 .table .user-info .member-name{
-text-align: center;
-padding-left: 10px;
+  text-align: center;
+  padding-left: 10px;
 font-size: large;
 font-weight: 450;
 }
 .overflow-table{
-height: 74.5vh;
-overflow-x:hidden; 
- overflow-y:auto;
- text-align: center;
+  height: 74.5vh;
+  overflow-x:hidden; 
+  overflow-y:auto;
+  text-align: center;
 }
 .overflow-member-table{
   overflow-x:hidden; 
-   overflow-y:auto;
+  overflow-y:auto;
   
   
 }
@@ -415,20 +415,20 @@ overflow-x:hidden;
   background-color:#df4930;
 }
 .burger{
-
+  
   color: #ffffff;
   border: 3px solid #ffffff;
 }
 .offcanvas-footer{
   position: fixed;
   color: #ee2603;
- top:90vh;
+  top:90vh;
   background-color: #001C30;
   height: 7vh;
   width: 350px;
- padding: 10px;
- border-radius: 10px;
- text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
  font-size: larger;
 }
 .memu{
@@ -441,7 +441,7 @@ overflow-x:hidden;
   border-radius: 15px;
   width: 370px;
   background-color: #ffffff;
-
+  
 }
 .menu-item:hover{
   background-color: rgba(104, 104, 104, 0.164);
@@ -465,7 +465,7 @@ overflow-x:hidden;
   justify-content: center;
 }
 .delete-btn{
- margin-left: 25px;
+  margin-left: 25px;
   
 }
 .room-name{
@@ -501,23 +501,23 @@ overflow-x:hidden;
 }
 .room-list-details{
   text-align: center;
-font-size:5rem;
-padding-top: 20vh;
-color:lightgray
+  font-size:5rem;
+  padding-top: 20vh;
+  color:lightgray
 }
 
 
 .drop-menu{
   
 background: whitesmoke;
-  border: #001C30 1px solid;
-  border-radius: 10px;
-  position: absolute;
-  top: 50px;
-  right: 0.5vw;
+border: #001C30 1px solid;
+border-radius: 10px;
+position: absolute;
+top: 50px;
+right: 0.5vw;
 }
 .drop-menu-list {
-list-style: none;
+  list-style: none;
   padding-left: 0rem;
   padding-right: 1rem;
 }
@@ -539,21 +539,46 @@ list-style: none;
   padding: 10px;
   min-height: 72vh;
   border-radius: 20px;
+  
 }
 
-
-
+.user-avatar {
+  margin-left: 5vw;
+  margin-top: 1vh;
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.basic-information{
+  display: flex;
+}
+.user-name{
+  margin-top: 10vh;
+  margin-left: 3.5vw;
+}
+.user-bio{
+  margin-top: 5px;
+  margin-left: .9vw;
+}
+/* .user-name-container input {
+  width: 30vw;
+  height: 5vh;
+} */
+.other-details{
+  margin-top: 5vh;
+}
 @media screen and (max-width: 992px) {
   .wrapper {
     width: 65%;
     height: 90%;
     flex-direction: column;
   }
-
+  
   .loginTitle {
     display: none;
   }
-
+  
   .center {
     width: 100%;
     position: relative;
