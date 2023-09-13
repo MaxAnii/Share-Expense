@@ -17,7 +17,7 @@ const PersonalInformation = ({ user }) => {
             <input
               type="text"
               value={user.name}
-              className="form-control"
+              className="form-control form-control-lg"
               readOnly
             />
           </div>
@@ -25,7 +25,11 @@ const PersonalInformation = ({ user }) => {
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Bio
             </label>
-            <input type="text" placeholder="xyz" className="form-control" />
+            <input
+              type="text"
+              placeholder="xyz"
+              className="form-control form-control-lg"
+            />
           </div>
         </div>
       </div>
@@ -36,22 +40,33 @@ const PersonalInformation = ({ user }) => {
         <input
           type="text"
           value={user.image}
-          className="form-control"
+          className="form-control form-control-lg"
           readOnly
         />
       </div>
-      <div className="other-details">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
-          Email
-        </label>
-        <input
-          type="text"
-          value={user.email}
-          className="form-control"
-          readOnly
-        />
-      </div>
-      <ChangePassword></ChangePassword>
+      {user.editFlag === "editable" ? (
+        <>
+          <div className="other-details">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              Email
+            </label>
+            <input
+              type="text"
+              value={user.email}
+              className="form-control"
+              readOnly
+            />
+          </div>
+          <ChangePassword userId={user.id}></ChangePassword>
+        </>
+      ) : (
+        <div className="inforamtion">
+          <div class="alert alert-dark" role="alert">
+            You can't change Password or email because you have signed up using{" "}
+            {user.editFlag}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
