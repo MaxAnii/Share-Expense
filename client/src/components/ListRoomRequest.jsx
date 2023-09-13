@@ -29,7 +29,7 @@ const ListRoomRequest = (props) => {
     const data = await response.json();
 
     if (data.status === 400) {
-      setMessage("No new request");
+      setMessage("No request");
     } else {
       setMessage("");
       setRequestList(data);
