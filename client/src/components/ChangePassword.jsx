@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 const ChangePassword = (props) => {
-  const [roomDetails, setRoomDetails] = useState({
-    id: uuidv4(),
-    name: "",
-    desc: "",
-    adminId: props.userid,
+  const [password, setPassword] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confrimPassword: "",
   });
   const [message, setMessage] = useState("");
   const [showConfrim, setShowConfrim] = useState(true);
-  const createRoom = async () => {
+  const changePassword = async () => {
     setMessage("");
-    if (roomDetails.name.length == 0 || roomDetails.desc.length == 0) {
+    if (
+      password.oldPassword.length == 0 ||
+      password.newPassword.length == 0 ||
+      password.confrimPassword.length == 0
+    ) {
       setMessage("Please fil the details");
     } else {
       const response = await fetch("http://localhost:5000/user/addroom", {
@@ -21,16 +24,11 @@ const ChangePassword = (props) => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(roomDetails),
+        body: JSON.stringify(password),
       });
       if (response.status == 200) {
-        setMessage("Room created");
-        setRoomDetails({
-          id: uuidv4(),
-          name: "",
-          desc: "",
-          adminId: props.adminId,
-        });
+        setMessage("Password Changed");
+        setPassword({ ...password, newPassword: "", confrimPassword: "" });
         props.getRoom();
         setShowConfrim(false);
       } else setMessage("An error has occurred");
@@ -38,8 +36,12 @@ const ChangePassword = (props) => {
   };
   return (
     <div>
-      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Change Password
+      <button
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+        className="change-password"
+      >
+        Change Password ?
       </button>
       <div
         className="modal fade "
@@ -47,6 +49,7 @@ const ChangePassword = (props) => {
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
+        cd
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
@@ -54,7 +57,7 @@ const ChangePassword = (props) => {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Create Room
+                Change Password
               </h1>
               <button
                 type="button"
@@ -72,35 +75,44 @@ const ChangePassword = (props) => {
                   htmlFor="exampleFormControlInput1"
                   className="form-label"
                 >
-                  Room Name
+                  Old Password
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
-                  placeholder="xyz"
-                  value={roomDetails.name || ""}
-                  onChange={(e) =>
-                    setRoomDetails({ ...roomDetails, name: e.target.value })
-                  }
+                  placeholder="*******"
+                  onChange={(e) => {}}
+                />
+              </div>
+            </div>
+            <div className="modal-body">
+              <div className="mb-3">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="*******"
+                  onChange={(e) => {}}
                 />
               </div>
               <div className="mb-3">
                 <label
-                  htmlFor="exampleFormControlTextarea1"
+                  htmlFor="exampleFormControlInput1"
                   className="form-label"
                 >
-                  Room Description
+                  Confrim Password
                 </label>
-                <textarea
+                <input
+                  type="password"
                   className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="3"
-                  placeholder="For what purpose the room is created"
-                  value={roomDetails.desc || ""}
-                  onChange={(e) =>
-                    setRoomDetails({ ...roomDetails, desc: e.target.value })
-                  }
-                ></textarea>
+                  placeholder="*******"
+                  onChange={(e) => {}}
+                />
               </div>
               <p className="error-message"> {message}</p>
             </div>
@@ -119,7 +131,7 @@ const ChangePassword = (props) => {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={createRoom}
+                  onClick={changePassword}
                 >
                   Confrim
                 </button>
