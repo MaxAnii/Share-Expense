@@ -45,7 +45,7 @@ router.get(
     const email = req.user.id;
     const name = req.user.displayName;
     const image = req.user.photos[0].value;
-    const user = await addGoogleGitUser(email, name, image);
+    const user = await addGoogleGitUser(email, name, image, "Google");
     req.session.user = user;
     res.redirect("http://localhost:3000/");
   }
@@ -61,7 +61,7 @@ router.get(
     const email = req.user.emails[0].value;
     const name = req.user.displayName;
     const image = req.user.photos[0].value;
-    const user = await addGoogleGitUser(email, name, image);
+    const user = await addGoogleGitUser(email, name, image, "Github");
 
     req.session.user = user;
     res.redirect("http://localhost:3000/home");
