@@ -304,6 +304,14 @@ font-size: x-large;
   border-radius: 19px;
   z-index: 2;
 }
+.edit-details{
+  position: fixed; 
+ bottom: 70vh;
+  right: 16vw;
+  height: 60px;
+  width: 60px;
+  border-radius: 19px;
+}
 .modal-header , .modal-footer{
   background-color: #001c30e5;
   color: white;
@@ -575,6 +583,11 @@ right: 0.5vw;
   text-decoration: underline;
   margin-left: 75%;
 }
+.inforamtion{
+  margin-top: 3vh;
+  text-align: center;
+}
+
 @media screen and (max-width: 900px) {
   .wrapper {
     width: 65%;
@@ -637,5 +650,8 @@ display: block;
 }
 .other-details{
   margin: 0vh;
+}
+.edit-details{
+  right: 30px;
 }
 }

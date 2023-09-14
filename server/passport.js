@@ -41,13 +41,13 @@ passport.use(
           message: "Incorrect username or password.",
         });
       }
-      console.log(result.rows[0]);
       const user = {
         id: result.rows[0].id,
         email: result.rows[0].email,
         name: result.rows[0].name,
         image: result.rows[0].image,
         editFlag: result.rows[0].editFlag,
+        bio: result.rows[0].bio,
       };
       return done(null, user);
     } catch (err) {
