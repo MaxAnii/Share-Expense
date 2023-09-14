@@ -16,6 +16,8 @@ const ChangePassword = (props) => {
       password.confrimPassword.length == 0
     ) {
       setMessage("Please fil the details");
+    } else if (password.confrimPassword !== password.newPassword) {
+      setMessage("Password is not matching");
     } else {
       const response = await fetch("http://localhost:5000/user/addroom", {
         method: "POST",
@@ -41,7 +43,7 @@ const ChangePassword = (props) => {
         data-bs-target="#staticBackdrop"
         className="change-password"
       >
-        Change Password ?
+        Change Password
       </button>
       <div
         className="modal fade "
