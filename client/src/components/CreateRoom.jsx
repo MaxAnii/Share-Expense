@@ -14,6 +14,7 @@ const CreateRoom = (props) => {
     if (roomDetails.name.length == 0 || roomDetails.desc.length == 0) {
       setMessage("Please fil the details");
     } else {
+      console.log(roomDetails);
       const response = await fetch("http://localhost:5000/user/addroom", {
         method: "POST",
         headers: {
@@ -26,10 +27,10 @@ const CreateRoom = (props) => {
       if (response.status == 200) {
         setMessage("Room created");
         setRoomDetails({
+          ...roomDetails,
           id: uuidv4(),
           name: "",
           desc: "",
-          adminId: props.adminId,
         });
         props.getRoom();
         setShowConfrim(false);
@@ -73,6 +74,7 @@ const CreateRoom = (props) => {
                 aria-label="Close"
                 onClick={() => {
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               ></button>
             </div>
@@ -121,6 +123,7 @@ const CreateRoom = (props) => {
                 data-bs-dismiss="modal"
                 onClick={() => {
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               >
                 Close
