@@ -7,9 +7,11 @@ const addGoogleGitUser = async (email, name, image, editFlag) => {
   if (result.rows.length == 0) {
     const password = "";
     const id = v4();
+    const bio =
+      "Together, we can master the art of cost-sharing and enjoy life's pleasures without the financial stress.";
     result = await pool.query(
-      'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
-      [name, email, password, image, editFlag, id]
+      'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *',
+      [name, email, password, image, editFlag, id, bio]
     );
   }
   const user = {
@@ -18,6 +20,7 @@ const addGoogleGitUser = async (email, name, image, editFlag) => {
     name: result.rows[0].name,
     image: result.rows[0].image,
     editFlag: result.rows[0].editFlag,
+    bio: result.rows.bio,
   };
   return user;
 };
@@ -34,9 +37,11 @@ const addNewUser = async (req, res) => {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgn8b-nQ_xNyOoSV5KV-DXINTAqg-Niov6sw";
     const editFlag = "editable";
     const id = v4();
+    const bio =
+      "Together, we can master the art of cost-sharing and enjoy life's pleasures without the financial stress.";
     user = await pool.query(
-      'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5,$6) RETURNING *',
-      [name, email, password, defaultImage, editFlag, id]
+      'INSERT INTO "user" VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *',
+      [name, email, password, defaultImage, editFlag, id, bio]
     );
     res.json({
       status: 200,
