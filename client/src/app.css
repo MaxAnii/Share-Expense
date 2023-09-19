@@ -603,7 +603,9 @@ right: 0.5vw;
 .card-body{
   min-height: 13vh;
 }
-
+.note-delete{
+  margin-top: -1.6vh;
+}
 
 
 
