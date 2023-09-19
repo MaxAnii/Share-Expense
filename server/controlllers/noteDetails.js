@@ -48,5 +48,29 @@ const getNote = async (req, res) => {
     console.log(error.message);
   }
 };
+const deleteNote = async (req, res) => {
+  try {
+    const { noteid } = req.params;
 
-module.exports = { addNote, getNote, postgresDateFormate };
+    let result = await pool.query(
+      'DELETE FROM "expense" WHERE "noteid"=$1 RETURNING *',
+      [noteid]
+    );
+    result = await pool.query('DELETE FROM "note" WHERE "id"=$1 RETURNING *', [
+      noteid,
+    ]);
+
+    if (result.rows.length !== 0) {
+      res.json({
+        status: 200,
+      });
+    } else {
+      res.json({
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+module.exports = { addNote, getNote, postgresDateFormate, deleteNote };
