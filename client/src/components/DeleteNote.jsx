@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const DeleteNote = (props) => {
   const params = useParams();
-  const noteid = params.noteid;
+  const noteid = props.noteid;
   const deleteNote = async () => {
     const response = await fetch(
       `http://localhost:5000/user/deletenote/${noteid}`,
@@ -18,7 +18,7 @@ const DeleteNote = (props) => {
     );
     const data = await response.json();
     if (data.status === 200) {
-      props.getExpense();
+      props.getNote();
     } else {
       alert("error");
     }

@@ -40,7 +40,6 @@ const NoteList = (props) => {
   useEffect(() => {
     getNote();
   }, []);
-
   return (
     <>
       <CreateNote userid={props.userid} getNote={getNote}></CreateNote>
@@ -57,7 +56,10 @@ const NoteList = (props) => {
                       </h5>
                       <div className="note-delete">
                         {props.userid === elem.adminid ? (
-                          <DeleteNote></DeleteNote>
+                          <DeleteNote
+                            noteid={elem.id}
+                            getNote={getNote}
+                          ></DeleteNote>
                         ) : (
                           ""
                         )}
