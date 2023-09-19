@@ -13,7 +13,7 @@ const {
   DeleteRoom,
   getRoomMemberList,
 } = require("../controlllers/roomDetails");
-const { addNote, getNote } = require("../controlllers/noteDetails");
+const { addNote, getNote, deleteNote } = require("../controlllers/noteDetails");
 const {
   addExpense,
   getExpense,
@@ -44,4 +44,5 @@ router.delete("/deleteroom", DeleteRoom);
 router.get("/getuserdetails/:id", getUserDetails);
 router.put("/updatedetails", updateDetails);
 router.put("/updatepassword", changePassword);
+router.delete("/deletenote/:noteid", deleteNote);
 module.exports = router;
