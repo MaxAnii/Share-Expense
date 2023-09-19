@@ -66,7 +66,7 @@ const RoomList = (props) => {
                         {elem.name[0].toUpperCase()}
                       </button>
                     </td>
-                    <td>
+                    <td className="room-details">
                       <p className="room-name">{elem.name.toUpperCase()}</p>
                       <p className="room-description">{elem.description}</p>
                     </td>
