@@ -3,7 +3,7 @@ import Github from "../img/github.png";
 import { useState } from "react";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
-const LoginSignup = () => {
+const LoginSignup = (props) => {
   const [show, setShow] = useState(true);
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
@@ -32,7 +32,7 @@ const LoginSignup = () => {
         <div className="right">
           {show ? (
             <>
-              <Login></Login>
+              <Login getUser={props.getUser}></Login>
               <div className="signup-link">
                 Don't have an account?{" "}
                 <button
