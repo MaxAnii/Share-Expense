@@ -596,6 +596,25 @@ right: 0.5vw;
   font-size:smaller;
   text-align: center;
 }
+.note-conatainer{
+  display: flex;
+  justify-content: space-between;
+}
+.card-body{
+  min-height: 13vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 900px) {
   .wrapper {
     width: 65%;
