@@ -48,7 +48,13 @@ const App = () => {
           />
           <Route
             path="/login"
-            element={user ? <Home user={user}></Home> : <LoginSignup />}
+            element={
+              user ? (
+                <Home user={user}></Home>
+              ) : (
+                <LoginSignup getUser={getUser} />
+              )
+            }
           />
 
           <Route
