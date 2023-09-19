@@ -479,6 +479,9 @@ font-weight: 450;
 .room-name{
   margin:5px 20px;
 }
+.room-details{
+  margin-right: 100vw;
+}
 .room-option{
  position: absolute;
  top: 20vh;
@@ -587,7 +590,12 @@ right: 0.5vw;
   margin-top: 3vh;
   text-align: center;
 }
-
+.member-bio{
+  margin-top: 1.5vh;
+  margin-left: 3vw;
+  font-size:smaller;
+  text-align: center;
+}
 @media screen and (max-width: 900px) {
   .wrapper {
     width: 65%;
