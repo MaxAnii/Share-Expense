@@ -20,7 +20,11 @@ const {
   deleteExpense,
   updateExpense,
 } = require("../controlllers/expenseDetails");
-const updateDetails = require("../controlllers/UpdateUserDetails");
+const {
+  updateDetails,
+  getUserDetails,
+  changePassword,
+} = require("../controlllers/UpdateUserDetails");
 router.post("/addroom", addRoom);
 router.get("/getroom/:userid", getRoom);
 router.get("/roommemberlist/:roomid", getRoomMemberList);
@@ -37,5 +41,7 @@ router.delete("/deleteexpense/:noteid/:expenseid", deleteExpense);
 router.put("/updateexpense", updateExpense);
 router.delete("/leaveroom", leaveRoom);
 router.delete("/deleteroom", DeleteRoom);
+router.get("/getuserdetails/:id", getUserDetails);
 router.put("/updatedetails", updateDetails);
+router.put("/updatepassword", changePassword);
 module.exports = router;
