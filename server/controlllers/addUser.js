@@ -48,4 +48,30 @@ const addNewUser = async (req, res) => {
     });
   }
 };
-module.exports = { addGoogleGitUser, addNewUser };
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const result = await pool.query(
+      'SELECT * FROM "user" WHERE "email"=$1 AND "password"=$2',
+      [email, password]
+    );
+    console.log(result.rows.length);
+    if (result.rows.length !== 0) {
+      const user = {
+        id: result.rows[0].id,
+        email: result.rows[0].email,
+        name: result.rows[0].name,
+        image: result.rows[0].image,
+        editFlag: result.rows[0].editFlag,
+        bio: result.rows.bio,
+      };
+      req.session.user = user;
+      res.json({ status: 200 });
+    } else res.json({ status: 400 });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = { addGoogleGitUser, addNewUser, login };
