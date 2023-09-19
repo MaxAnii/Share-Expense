@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 const ChangePassword = (props) => {
   const [password, setPassword] = useState({
     oldPassword: "",
@@ -18,20 +17,32 @@ const ChangePassword = (props) => {
       setMessage("Please fil the details");
     } else if (password.confrimPassword !== password.newPassword) {
       setMessage("Password is not matching");
+    } else if (password.oldPassword !== props.oldPassword) {
+      setMessage("Password is incorrect");
     } else {
-      const response = await fetch("http://localhost:5000/user/addroom", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(password),
-      });
+      const response = await fetch(
+        "http://localhost:5000/user/updatepassword",
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            id: props.id,
+            newPassword: password.newPassword,
+          }),
+        }
+      );
       if (response.status == 200) {
         setMessage("Password Changed");
-        setPassword({ ...password, newPassword: "", confrimPassword: "" });
-        props.getRoom();
+        setPassword({
+          ...password,
+          oldPassword: "",
+          newPassword: "",
+          confrimPassword: "",
+        });
         setShowConfrim(false);
       } else setMessage("An error has occurred");
     }
@@ -67,7 +78,14 @@ const ChangePassword = (props) => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={() => {
+                  setPassword({
+                    ...password,
+                    oldPassword: "",
+                    newPassword: "",
+                    confrimPassword: "",
+                  });
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               ></button>
             </div>
@@ -83,11 +101,13 @@ const ChangePassword = (props) => {
                   type="password"
                   className="form-control"
                   placeholder="*******"
-                  onChange={(e) => {}}
+                  value={password.oldPassword}
+                  onChange={(e) => {
+                    setPassword({ ...password, oldPassword: e.target.value });
+                  }}
                 />
               </div>
-            </div>
-            <div className="modal-body">
+
               <div className="mb-3">
                 <label
                   htmlFor="exampleFormControlInput1"
@@ -99,7 +119,10 @@ const ChangePassword = (props) => {
                   type="password"
                   className="form-control"
                   placeholder="*******"
-                  onChange={(e) => {}}
+                  value={password.newPassword}
+                  onChange={(e) => {
+                    setPassword({ ...password, newPassword: e.target.value });
+                  }}
                 />
               </div>
               <div className="mb-3">
@@ -113,7 +136,13 @@ const ChangePassword = (props) => {
                   type="password"
                   className="form-control"
                   placeholder="*******"
-                  onChange={(e) => {}}
+                  value={password.confrimPassword}
+                  onChange={(e) => {
+                    setPassword({
+                      ...password,
+                      confrimPassword: e.target.value,
+                    });
+                  }}
                 />
               </div>
               <p className="error-message"> {message}</p>
@@ -124,7 +153,14 @@ const ChangePassword = (props) => {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
                 onClick={() => {
+                  setPassword({
+                    ...password,
+                    oldPassword: "",
+                    newPassword: "",
+                    confrimPassword: "",
+                  });
                   setShowConfrim(true);
+                  setMessage("");
                 }}
               >
                 Close
