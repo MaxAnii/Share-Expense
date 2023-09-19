@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChangePassword from "../components/ChangePassword";
 const PersonalInformation = ({ user }) => {
-  const [userDetails, setUserDetails] = useState({
-    ...user,
-  });
+  const [userDetails, setUserDetails] = useState({});
   const [message, setMessage] = useState("");
   const [readOnly, setReadOnly] = useState(true);
+  const getUserDetails = async () => {
+    const response = await fetch(
+      `http://localhost:5000/user/getuserdetails/${user.id}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    if (data.status !== 400) setUserDetails(data);
+    else alert("Error in fetching details");
+  };
   const updateDetails = async () => {
     const response = await fetch("http://localhost:5000/user/updatedetails", {
       method: "PUT",
@@ -17,8 +31,12 @@ const PersonalInformation = ({ user }) => {
       body: JSON.stringify(userDetails),
     });
     const data = await response.json();
-    setMessage(data.message);
+    getUserDetails();
+    alert(data.message);
   };
+  useEffect(() => {
+    getUserDetails();
+  }, []);
   return (
     <>
       <div className="form-container">
@@ -125,7 +143,10 @@ const PersonalInformation = ({ user }) => {
                 }}
               />
             </div>
-            <ChangePassword userId={user.id}></ChangePassword>
+            <ChangePassword
+              oldPassword={userDetails.password}
+              id={user.id}
+            ></ChangePassword>
           </>
         ) : (
           <div className="inforamtion">
