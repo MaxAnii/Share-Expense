@@ -38,11 +38,11 @@ const getMemberList = async (req, res) => {
     const { username } = req.params;
     console.log(username);
     const result = await pool.query(
-      'SELECT "id","name","image" FROM "user" WHERE "name"=$1',
+      'SELECT "id","name","image","bio" FROM "user" WHERE "name"=$1',
       [username]
     );
     if (result.rows.length !== 0) {
-      res.status(200).json(result.rows);
+      res.json(result.rows);
     } else {
       res.json({
         status: 400,
