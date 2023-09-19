@@ -148,6 +148,7 @@ const AddMember = (props) => {
                                 <span className="member-name">
                                   {" "}
                                   {elem.name}
+                                  <p className="member-bio"> {elem.bio}</p>
                                 </span>
                               </td>
 
