@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { addGoogleGitUser, addNewUser } = require("../controlllers/addUser");
+const {
+  addGoogleGitUser,
+  addNewUser,
+  login,
+} = require("../controlllers/addUser");
 router.get("/login/failed", async (req, res) => {
   res.status(401).json({
     success: false,
@@ -68,16 +72,6 @@ router.get(
   }
 );
 
-router.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/login/failed" }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    console.log(req.user);
-    req.session.user = req.user;
-    res.redirect("http://localhost:3000");
-  }
-);
-
 router.post("/signup", addNewUser);
+router.post("/login/local", login);
 module.exports = router;
