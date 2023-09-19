@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
-import NoteData from "../pages/NoteData";
 import CreateNote from "./CreateNote";
+import DeleteNote from "./DeleteNote";
 const NoteList = (props) => {
   const navigate = useNavigate();
   const params = useParams();
@@ -51,10 +51,20 @@ const NoteList = (props) => {
               <div className="col" id={index}>
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="card-title">
-                      {elem.noteName.toUpperCase()}
-                    </h5>
+                    <div className="note-conatainer">
+                      <h5 className="card-title">
+                        {elem.noteName.toUpperCase()}
+                      </h5>
+                      <div className="note-delete">
+                        {props.userid === elem.adminid ? (
+                          <DeleteNote></DeleteNote>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
                     <button
+                      className="btn btn-primary"
                       onClick={() => {
                         navigate(
                           `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}/${elem.noteName}`
@@ -63,13 +73,6 @@ const NoteList = (props) => {
                     >
                       open
                     </button>
-                    {/* <NoteData
-                      noteid={elem.id}
-                      name={elem.noteName}
-                      usernoteid={elem.adminid}
-                      roomAdminId={params.roomadminId}
-                      userid={props.userid}
-                    ></NoteData> */}
                   </div>
                   <div className="card-footer">
                     <small className="text-body-secondary">
