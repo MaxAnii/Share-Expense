@@ -1,13 +1,14 @@
 import { useState } from "react";
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
-
+  const [message, setMessage] = useState("");
   const localLogin = async (e) => {
-    console.log(user);
-    fetch("http://localhost:5000/auth/login", {
+    e.preventDefault();
+    setMessage("");
+    const response = await fetch("http://localhost:5000/auth/login/local", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -15,32 +16,30 @@ const Login = () => {
       },
       credentials: "include",
       body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (response.status === 200) return response.json();
-        throw new Error("authentication has been failed!");
-      })
-      .then((resObject) => {
-        setUser(resObject.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+    const data = await response.json();
+    if (data.status === 200) {
+      props.getUser();
+      window.location.reload();
+    } else {
+      setMessage("Invalid Credentials");
+    }
   };
   return (
     <form onSubmit={localLogin}>
       <div className="right">
+        <p style={{ color: "red" }}>{message}</p>
         <input
           className="input"
-          type="text"
-          placeholder="Username"
+          type="email"
+          placeholder="Email"
           required
           value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
         <input
           className="input"
-          type="text"
+          type="password"
           placeholder="Password"
           required
           value={user.password}
