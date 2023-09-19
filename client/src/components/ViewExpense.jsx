@@ -40,7 +40,9 @@ const ViewExpense = (props) => {
   return (
     <div>
       <div className="total-expense mb-3 ">
-        <div>This month's expense </div>
+        <div>
+          The expense from <b>{fromDate}</b> to <b>{toDate}</b> is{" "}
+        </div>
         <div>{totalAmount}</div>
       </div>
       <hr></hr>
