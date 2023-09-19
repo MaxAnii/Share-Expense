@@ -29,33 +29,6 @@ passport.use(
   )
 );
 
-passport.use(
-  new LocalStrategy(async function verify(username, password, done) {
-    try {
-      const result = await pool.query(
-        'SELECT * FROM "user" WHERE "email" = $1 AND "password"=$2',
-        [username, password]
-      );
-      if (result.rows.length === 0) {
-        return done(null, false, {
-          message: "Incorrect username or password.",
-        });
-      }
-      const user = {
-        id: result.rows[0].id,
-        email: result.rows[0].email,
-        name: result.rows[0].name,
-        image: result.rows[0].image,
-        editFlag: result.rows[0].editFlag,
-        bio: result.rows[0].bio,
-      };
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
-);
-
 passport.serializeUser((user, done) => {
   done(null, user);
 });
