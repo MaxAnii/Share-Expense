@@ -12,13 +12,6 @@ router.get("/login/failed", async (req, res) => {
     message: "failure",
   });
 });
-router.post("/login/failed", async (req, res) => {
-  console.log("failed");
-  res.status(401).json({
-    success: false,
-    message: "failure",
-  });
-});
 
 router.get("/login/success", async (req, res) => {
   if (req.session.user) {
