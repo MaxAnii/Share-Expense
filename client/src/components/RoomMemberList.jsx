@@ -28,7 +28,7 @@ const RoomMemberList = () => {
     <div>
       <button
         type="button"
-        class="edit-btn"
+        className="edit-btn"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
         onClick={getMemberList}
@@ -37,30 +37,30 @@ const RoomMemberList = () => {
       </button>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
                 Room member list
               </h1>
               <button
                 type="button"
-                class="btn-close modal-close-btn"
+                className="btn-close modal-close-btn"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <div className=".overflow-member-table">
-                <table class="table">
+                <table className="table">
                   <thead>
                     <tr></tr>
                   </thead>
@@ -94,10 +94,10 @@ const RoomMemberList = () => {
                 </table>
               </div>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
