@@ -3,7 +3,6 @@ import CreateRoom from "./CreateRoom";
 import { Link, useNavigate } from "react-router-dom";
 
 const RoomList = (props) => {
-  console.log(props);
   const color = ["black", "dimgray", "darkgray", "silver", "gray"];
   var colorIndex = 0;
 
@@ -28,7 +27,6 @@ const RoomList = (props) => {
       }
     );
     const data = await response.json();
-    console.log(data);
     if (data.status === 400) setMessage("Create a room");
     else {
       setRoomDeetails(data);
@@ -49,29 +47,28 @@ const RoomList = (props) => {
         )}
         <table className="table table-light  table-hover">
           <tbody>
-            {roomDetails.map((elem) => {
+            {roomDetails.map((elem, i) => {
               return (
-                <>
-                  <tr
-                    className="table-row room-row"
-                    onClick={() => {
-                      Navigate(`/room/${elem.name}/${elem.id}/${elem.adminid}`);
-                    }}
-                  >
-                    <td>
-                      <button
-                        className="room-image"
-                        style={{ backgroundColor: color[index()] }}
-                      >
-                        {elem.name[0].toUpperCase()}
-                      </button>
-                    </td>
-                    <td className="room-details">
-                      <p className="room-name">{elem.name.toUpperCase()}</p>
-                      <p className="room-description">{elem.description}</p>
-                    </td>
-                  </tr>
-                </>
+                <tr
+                  key={i}
+                  className="table-row room-row"
+                  onClick={() => {
+                    Navigate(`/room/${elem.name}/${elem.id}/${elem.adminid}`);
+                  }}
+                >
+                  <td>
+                    <button
+                      className="room-image"
+                      style={{ backgroundColor: color[index()] }}
+                    >
+                      {elem.name[0].toUpperCase()}
+                    </button>
+                  </td>
+                  <td className="room-details">
+                    <p className="room-name">{elem.name.toUpperCase()}</p>
+                    <p className="room-description">{elem.description}</p>
+                  </td>
+                </tr>
               );
             })}
           </tbody>
