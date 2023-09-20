@@ -28,7 +28,7 @@ const DeleteRoom = () => {
       <div>
         <button
           type="button"
-          class="edit-btn leave-room"
+          className="edit-btn leave-room"
           data-bs-toggle="modal"
           data-bs-target="#delete-room"
         >
@@ -36,42 +36,42 @@ const DeleteRoom = () => {
         </button>
 
         <div
-          class="modal fade"
+          className="modal fade"
           id="delete-room"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="staticBackdropLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
                   Warning
                 </h1>
                 <button
                   type="button"
-                  class="btn-close modal-close-btn"
+                  className="btn-close modal-close-btn"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 All the room details will be deleted from you as well as from
                 the room members.
               </div>
-              <div class="modal-footer">
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
                 <button
                   type="button"
-                  class="btn btn-danger"
+                  className="btn btn-danger"
                   data-bs-dismiss="modal"
                   onClick={deleteRoom}
                 >
