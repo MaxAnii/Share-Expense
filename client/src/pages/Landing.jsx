@@ -32,7 +32,7 @@ const Landing = () => {
         </button>
       </header>
 
-      <section class="room-creation">
+      <section className="room-creation">
         <h2>Create Your ShareExpense Room</h2>
         <p>
           Collaborate with friends, family, or roommates to manage shared
@@ -41,7 +41,7 @@ const Landing = () => {
           Keep track of who spends what, settle debts, and maintain financial
           clarity.
         </p>
-        <div class="how-it-works">
+        <div className="how-it-works">
           <h3>How It Works</h3>
           <ul>
             <li>
@@ -73,7 +73,7 @@ const Landing = () => {
         </div>
       </section>
 
-      <section class="features">
+      <section className="features">
         <h3>Features You'll Love</h3>
         <ul>
           <li>
@@ -100,8 +100,8 @@ const Landing = () => {
         </ul>
       </section>
 
-      <section class="footer">
-        <p class="disclaimer">
+      <section className="footer">
+        <p className="disclaimer">
           Disclaimer: ShareExpense Hub is a tool for expense management and
           tracking. We do not facilitate actual financial transactions. Users
           are responsible for settling debts outside the platform.
