@@ -59,41 +59,36 @@ const ViewExpense = (props) => {
         </div>
       </div>
       <div className="overflow-table">
-        <table class="table table-striped table-borderless">
+        <table className="table table-striped table-borderless">
           <thead>
             <tr></tr>
           </thead>
           <tbody>
             {expenseData.map((elem) => {
               return (
-                <>
-                  <tr className="data-row " id={elem.expenseid}>
-                    <td className="date-cell">
-                      {elem.expensedate.slice(0, 10)}
+                <tr className="data-row row-gap" key={elem.expenseid}>
+                  <td className="date-cell">{elem.expensedate.slice(0, 10)}</td>
+                  <td className="reason-cell ">{elem.reason}</td>
+                  <td>{elem.amount}</td>
+                  {props.loginUser === params.usernoteid ? (
+                    <td>
+                      <div className="expense-option">
+                        <DeleteExpense
+                          expenseid={elem.expenseid}
+                          getExpense={getExpense}
+                        ></DeleteExpense>
+                        <EditExpense
+                          expenseid={elem.expenseid}
+                          reason={elem.reason}
+                          amount={elem.amount}
+                          getExpense={getExpense}
+                        ></EditExpense>
+                      </div>
                     </td>
-                    <td className="reason-cell ">{elem.reason}</td>
-                    <td>{elem.amount}</td>
-                    {props.loginUser === params.usernoteid ? (
-                      <td>
-                        <div className="expense-option">
-                          <DeleteExpense
-                            expenseid={elem.expenseid}
-                            getExpense={getExpense}
-                          ></DeleteExpense>
-                          <EditExpense
-                            expenseid={elem.expenseid}
-                            reason={elem.reason}
-                            amount={elem.amount}
-                            getExpense={getExpense}
-                          ></EditExpense>
-                        </div>
-                      </td>
-                    ) : (
-                      ""
-                    )}
-                  </tr>
-                  <div className="row-gap"></div>
-                </>
+                  ) : (
+                    ""
+                  )}
+                </tr>
               );
             })}
           </tbody>
