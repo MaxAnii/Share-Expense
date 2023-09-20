@@ -49,38 +49,36 @@ const ListRoomRequest = (props) => {
         )}
         <table className="table table-light  table-hover">
           <tbody>
-            {requestList.map((elem) => {
+            {requestList.map((elem, i) => {
               return (
-                <>
-                  <tr className="table-row room-row">
-                    <td>
-                      <button
-                        className="room-image"
-                        style={{ backgroundColor: color[index()] }}
-                      >
-                        {elem.name[0].toUpperCase()}
-                      </button>
-                    </td>
-                    <td>
-                      <p className="room-name">{elem.name.toUpperCase()}</p>
-                      <p className="room-description">{elem.description}</p>
-                    </td>
-                    <td>
-                      <AcceptRequest
-                        userid={elem.memberid}
-                        roomid={elem.roomid}
-                        getRequestList={getRequestList}
-                      ></AcceptRequest>
-                    </td>
-                    <td>
-                      <RejectRequest
-                        userid={elem.memberid}
-                        roomid={elem.roomid}
-                        getRequestList={getRequestList}
-                      ></RejectRequest>
-                    </td>
-                  </tr>
-                </>
+                <tr className="table-row room-row" key={i}>
+                  <td>
+                    <button
+                      className="room-image"
+                      style={{ backgroundColor: color[index()] }}
+                    >
+                      {elem.name[0].toUpperCase()}
+                    </button>
+                  </td>
+                  <td>
+                    <p className="room-name">{elem.name.toUpperCase()}</p>
+                    <p className="room-description">{elem.description}</p>
+                  </td>
+                  <td>
+                    <AcceptRequest
+                      userid={elem.memberid}
+                      roomid={elem.roomid}
+                      getRequestList={getRequestList}
+                    ></AcceptRequest>
+                  </td>
+                  <td>
+                    <RejectRequest
+                      userid={elem.memberid}
+                      roomid={elem.roomid}
+                      getRequestList={getRequestList}
+                    ></RejectRequest>
+                  </td>
+                </tr>
               );
             })}
           </tbody>
