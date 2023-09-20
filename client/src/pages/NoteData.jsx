@@ -48,10 +48,10 @@ const NoteData = ({ user }) => {
         <div>
           {params.usernoteid === user.id ? (
             <form onSubmit={addExpense} className="form">
-              <div class="input-group mb-3 input-group-lg">
+              <div className="input-group mb-3 input-group-lg">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Reason Expense made for"
                   value={noteData.reason}
                   onChange={(e) => {
@@ -61,8 +61,9 @@ const NoteData = ({ user }) => {
                 />
 
                 <input
+                  ViewExpense
                   type="number"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Amount you spend"
                   aria-label="Server"
                   value={noteData.amount}
