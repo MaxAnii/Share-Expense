@@ -367,16 +367,15 @@ font-size: x-large;
 }
 
 .total-expense{
+  min-height: 10vh;
   margin-top: 10px;
-  height: 10vh;
-  padding: 100px;
-  padding-top: 2vh;
+  height: auto;
+  padding: 4vh;
   background-color: #001C30;
   color: aliceblue;
   border-radius: 30px;
   font-size: larger;
   text-align: center;
-  line-height: 5vh;
 }
 
 .table  .date-cell{
