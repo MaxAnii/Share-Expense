@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ChangePassword from "../components/ChangePassword";
 const PersonalInformation = ({ user }) => {
   const [userDetails, setUserDetails] = useState({});
-  const [message, setMessage] = useState("");
   const [readOnly, setReadOnly] = useState(true);
   const getUserDetails = async () => {
     const response = await fetch(
@@ -46,7 +45,7 @@ const PersonalInformation = ({ user }) => {
             width="30"
             height="30"
             fill="currentColor"
-            class="bi bi-pencil btn btn-dark edit-details"
+            className="bi bi-pencil btn btn-dark edit-details"
             viewBox="0 0 16 16"
             onClick={() => {
               setReadOnly(false);
@@ -60,7 +59,7 @@ const PersonalInformation = ({ user }) => {
             width="30"
             height="30"
             fill="currentColor"
-            class="bi bi-check2-all btn btn-success edit-details"
+            className="bi bi-check2-all btn btn-success edit-details"
             viewBox="0 0 16 16"
             onClick={() => {
               updateDetails();
@@ -75,7 +74,7 @@ const PersonalInformation = ({ user }) => {
         <div className="basic-information">
           <div className="user-avatar-container">
             <img
-              src={userDetails.image}
+              src={userDetails.image || ""}
               alt="user profile"
               className="user-avatar"
             />
@@ -87,7 +86,7 @@ const PersonalInformation = ({ user }) => {
               </label>
               <input
                 type="text"
-                value={userDetails.name}
+                value={userDetails.name || ""}
                 className="form-control form-control-lg"
                 readOnly={readOnly}
                 onChange={(e) => {
@@ -105,7 +104,7 @@ const PersonalInformation = ({ user }) => {
                 rows="3"
                 cols="60"
                 readOnly={readOnly}
-                value={userDetails.bio}
+                value={userDetails.bio || ""}
                 onChange={(e) => {
                   setUserDetails({ ...userDetails, bio: e.target.value });
                 }}
@@ -119,7 +118,7 @@ const PersonalInformation = ({ user }) => {
           </label>
           <input
             type="text"
-            value={userDetails.image}
+            value={userDetails.image || ""}
             className="form-control form-control-lg"
             readOnly={readOnly}
             onChange={(e) => {
@@ -135,7 +134,7 @@ const PersonalInformation = ({ user }) => {
               </label>
               <input
                 type="text"
-                value={userDetails.email}
+                value={userDetails.email || ""}
                 className="form-control form-control-lg"
                 readOnly={readOnly}
                 onChange={(e) => {
@@ -150,7 +149,7 @@ const PersonalInformation = ({ user }) => {
           </>
         ) : (
           <div className="inforamtion">
-            <div class="alert alert-dark" role="alert">
+            <div className="alert alert-dark" role="alert">
               You can't change Password or email because you have signed up
               using <b className="edit-flag">{user.editFlag}</b>
             </div>
