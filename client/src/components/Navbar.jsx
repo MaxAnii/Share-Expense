@@ -20,9 +20,7 @@ const Navbar = ({ user }) => {
             />
           </li>
 
-          <li>
-            <Offcanvas></Offcanvas>
-          </li>
+          <Offcanvas></Offcanvas>
         </ul>
       ) : (
         <Link className="link login-link" to="login">
