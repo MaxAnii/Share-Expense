@@ -17,7 +17,6 @@ const addRoom = async (req, res) => {
 const getRoom = async (req, res) => {
   try {
     const { userid } = req.params;
-    console.log(userid);
     const status = true;
     const reslut = await pool.query(
       'SELECT "id","name","description","adminid" FROM "room" WHERE "adminid"=$1 UNION SELECT  "id","name","description","adminid" FROM "room","roomMember" WHERE "id"="roomid" AND "memberid"=$2 AND "status"=$3',
@@ -36,7 +35,6 @@ const getRoom = async (req, res) => {
 const getMemberList = async (req, res) => {
   try {
     const { username } = req.params;
-    console.log(username);
     const result = await pool.query(
       'SELECT "id","name","image","bio" FROM "user" WHERE "name"=$1',
       [username]
@@ -143,7 +141,6 @@ const acceptRequest = async (req, res) => {
       'UPDATE "roomMember" SET "status"=$1 WHERE "roomid"=$2 AND "memberid"=$3 RETURNING *',
       [status, roomid, userid]
     );
-    console.log(result.rows[0]);
     if (result.rows.length !== 0) {
       res.json({
         status: 200,
@@ -182,7 +179,6 @@ const rejectRequest = async (req, res) => {
 const DeleteRoom = async (req, res) => {
   try {
     const { roomid } = req.body;
-    console.log(roomid);
     let result = await pool.query(
       'DELETE FROM "roomMember" WHERE "roomid"=$1 RETURNING *',
       [roomid]
