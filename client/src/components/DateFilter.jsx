@@ -20,20 +20,20 @@ const DateFilter = (props) => {
 
   return (
     <>
-      <div class="input-group">
-        <span class="input-group-text">From</span>
+      <div className="input-group">
+        <span className="input-group-text">From</span>
         <input
           type="date"
-          class="form-control"
+          className="form-control"
           value={props.fromDate}
           onChange={(e) => props.setFromDate(e.target.value)}
         />
       </div>
-      <div class="input-group">
-        <span class="input-group-text">To</span>
+      <div className="input-group">
+        <span className="input-group-text">To</span>
         <input
           type="date"
-          class="form-control"
+          className="form-control"
           value={props.toDate}
           onChange={(e) => props.setToDate(e.target.value)}
         />
