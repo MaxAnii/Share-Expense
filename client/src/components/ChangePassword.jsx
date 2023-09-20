@@ -62,7 +62,6 @@ const ChangePassword = (props) => {
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
-        cd
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
