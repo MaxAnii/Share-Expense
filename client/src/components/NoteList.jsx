@@ -46,45 +46,43 @@ const NoteList = (props) => {
       <div className="row text-center row-cols-2 row-cols-md-4 g-4 m-4">
         {noteList.map((elem, index) => {
           return (
-            <>
-              <div className="col" id={index}>
-                <div className="card">
-                  <div className="card-body">
-                    <div className="note-conatainer">
-                      <h5 className="card-title">
-                        {elem.noteName.toUpperCase()}
-                      </h5>
-                      <div className="note-delete">
-                        {props.userid === elem.adminid ? (
-                          <DeleteNote
-                            noteid={elem.id}
-                            getNote={getNote}
-                          ></DeleteNote>
-                        ) : (
-                          ""
-                        )}
-                      </div>
+            <div className="col" key={index}>
+              <div className="card">
+                <div className="card-body">
+                  <div className="note-conatainer">
+                    <h5 className="card-title">
+                      {elem.noteName.toUpperCase()}
+                    </h5>
+                    <div className="note-delete">
+                      {props.userid === elem.adminid ? (
+                        <DeleteNote
+                          noteid={elem.id}
+                          getNote={getNote}
+                        ></DeleteNote>
+                      ) : (
+                        ""
+                      )}
                     </div>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => {
-                        navigate(
-                          `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}/${elem.noteName}`
-                        );
-                      }}
-                    >
-                      open
-                    </button>
                   </div>
-                  <div className="card-footer">
-                    <small className="text-body-secondary">
-                      created on {"' " + elem.creationdate.slice(0, 10) + " '"}
-                      {" by " + "' " + elem.name + "'"}
-                    </small>
-                  </div>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      navigate(
+                        `/room/${params.roomid}/${params.roomadminid}/notedata/${elem.id}/${elem.adminid}/${elem.noteName}`
+                      );
+                    }}
+                  >
+                    open
+                  </button>
+                </div>
+                <div className="card-footer">
+                  <small className="text-body-secondary">
+                    created on {"' " + elem.creationdate.slice(0, 10) + " '"}
+                    {" by " + "' " + elem.name + "'"}
+                  </small>
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>
