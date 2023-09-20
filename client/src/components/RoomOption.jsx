@@ -9,7 +9,7 @@ const RoomOption = (props) => {
   const [show, setShow] = useState(false);
   return (
     <>
-      <div class="btn-group">
+      <div className="btn-group">
         <button
           className="edit-btn btn btn-outline-dark"
           onClick={() => setShow(!show)}
@@ -19,11 +19,11 @@ const RoomOption = (props) => {
             width="30"
             height="40"
             fill="currentColor"
-            class="bi bi-sliders"
+            className="bi bi-sliders"
             viewBox="0 0 16 16"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
             />
           </svg>
@@ -32,11 +32,11 @@ const RoomOption = (props) => {
         {show ? (
           <div className="drop-menu">
             <ul className="drop-menu-list">
-              <li class="option-item">
+              <li className="option-item">
                 <RoomMemberList></RoomMemberList>
               </li>
 
-              <li class="option-item">
+              <li className="option-item">
                 {params.roomadminid === props.userid ? (
                   <DeleteRoom></DeleteRoom>
                 ) : (
