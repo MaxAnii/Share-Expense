@@ -26,7 +26,6 @@ const addExpense = async (req, res) => {
 const getExpense = async (req, res) => {
   try {
     const { noteid, fromdate, todate } = req.params;
-    console.log(req.params);
     const result = await pool.query(
       'SELECT * FROM "expense" WHERE "noteid"=$1 AND "expensedate" BETWEEN $2 AND $3 ORDER BY "expensedate" DESC ',
       [noteid, fromdate, todate]
@@ -64,7 +63,6 @@ const deleteExpense = async (req, res) => {
 };
 const updateExpense = async (req, res) => {
   try {
-    console.log("yo");
     const { roomid, noteid, reason, amount, expenseid } = req.body;
     const reslut = await pool.query(
       'UPDATE "expense" SET "reason"=$1, "amount"=$2 WHERE "noteid"=$3 AND "roomid"=$4 AND "expenseid"=$5 RETURNING *',
