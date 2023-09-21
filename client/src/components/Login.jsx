@@ -8,15 +8,18 @@ const Login = (props) => {
   const localLogin = async (e) => {
     e.preventDefault();
     setMessage("");
-    const response = await fetch("http://localhost:5000/auth/login/local", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(user),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/auth/login/local`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(user),
+      }
+    );
     const data = await response.json();
     if (data.status === 200) {
       props.getUser();

@@ -6,15 +6,18 @@ const AcceptRequest = (props) => {
     userid: props.userid,
   });
   const acceptRequest = async () => {
-    const response = await fetch("http://localhost:5000/user/acceptrequest", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(requestDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/user/acceptrequest`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(requestDetails),
+      }
+    );
     const data = await response.json();
     props.getRequestList();
     if (data.status === 200) alert("Room Added");

@@ -16,15 +16,18 @@ const CreateNote = (props) => {
     if (NoteDetails.name.length == 0) {
       setMessage("Please fil the details");
     } else {
-      const response = await fetch("http://localhost:5000/user/addNote", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(NoteDetails),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/user/addNote`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(NoteDetails),
+        }
+      );
       if (response.status == 200) {
         setMessage("Note created");
         setNoteDetails({

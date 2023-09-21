@@ -5,7 +5,7 @@ const PersonalInformation = ({ user }) => {
   const [readOnly, setReadOnly] = useState(true);
   const getUserDetails = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/getuserdetails/${user.id}`,
+      `${process.env.REACT_APP_URL}/user/getuserdetails/${user.id}`,
       {
         method: "GET",
         credentials: "include",
@@ -20,15 +20,18 @@ const PersonalInformation = ({ user }) => {
     else alert("Error in fetching details");
   };
   const updateDetails = async () => {
-    const response = await fetch("http://localhost:5000/user/updatedetails", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(userDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/user/updatedetails`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(userDetails),
+      }
+    );
     const data = await response.json();
     getUserDetails();
     alert(data.message);

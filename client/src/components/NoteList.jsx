@@ -10,7 +10,7 @@ const NoteList = (props) => {
   const [message, setMessage] = useState("");
   const getNote = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/getnote/${params.roomid}`,
+      `${process.env.REACT_APP_URL}/user/getnote/${params.roomid}`,
       {
         method: "GET",
         credentials: "include",

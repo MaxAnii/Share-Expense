@@ -21,7 +21,7 @@ const ChangePassword = (props) => {
       setMessage("Password is incorrect");
     } else {
       const response = await fetch(
-        "http://localhost:5000/user/updatepassword",
+        `${process.env.REACT_APP_URL}/user/updatepassword`,
         {
           method: "PUT",
           headers: {

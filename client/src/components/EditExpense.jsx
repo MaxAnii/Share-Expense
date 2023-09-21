@@ -13,15 +13,18 @@ const EditExpense = (props) => {
   const [message, setMessage] = useState("");
   const updateExpense = async () => {
     setMessage("");
-    const response = await fetch("http://localhost:5000/user/updateexpense", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(noteData),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/user/updateexpense`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(noteData),
+      }
+    );
     const data = await response.json();
     if (data.status === 200) {
       setMessage("Expense updated");

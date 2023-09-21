@@ -14,7 +14,7 @@ const ViewExpense = (props) => {
   const getExpense = async () => {
     setExpenseData([]);
     const response = await fetch(
-      `http://localhost:5000/user/getexpense/${props.noteid}/${fromDate}/${toDate}`,
+      `${process.env.REACT_APP_URL}/user/getexpense/${props.noteid}/${fromDate}/${toDate}`,
       {
         method: "GET",
         credentials: "include",

@@ -17,15 +17,18 @@ const NoteData = ({ user }) => {
   const addExpense = async (e) => {
     e.preventDefault();
     setMessage("");
-    const response = await fetch("http://localhost:5000/user/addexpense", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(noteData),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/user/addexpense`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(noteData),
+      }
+    );
     if (response.status === 200) {
       setGetNewData(!getNewData);
       setMessage("Expense added");

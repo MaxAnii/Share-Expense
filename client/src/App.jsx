@@ -13,7 +13,7 @@ import PersonalInformation from "./pages/PersonalInformation";
 const App = () => {
   const [user, setUser] = useState(null);
   const getUser = () => {
-    fetch("http://localhost:5000/auth/login/success", {
+    fetch(`${process.env.REACT_APP_URL}/auth/login/success`, {
       method: "GET",
       credentials: "include",
       headers: {

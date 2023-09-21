@@ -6,7 +6,7 @@ const DeleteNote = (props) => {
   const noteid = props.noteid;
   const deleteNote = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/deletenote/${noteid}`,
+      `${process.env.REACT_APP_URL}/user/deletenote/${noteid}`,
       {
         method: "DELETE",
         credentials: "include",

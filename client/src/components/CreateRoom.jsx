@@ -15,15 +15,18 @@ const CreateRoom = (props) => {
       setMessage("Please fil the details");
     } else {
       console.log(roomDetails);
-      const response = await fetch("http://localhost:5000/user/addroom", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(roomDetails),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/user/addroom`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(roomDetails),
+        }
+      );
       if (response.status == 200) {
         setMessage("Room created");
         setRoomDetails({

@@ -6,15 +6,18 @@ const RejectRequest = (props) => {
     userid: props.userid,
   });
   const rejectRoomRequest = async () => {
-    const response = await fetch("http://localhost:5000/user/rejectrequest", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(requestDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/user/rejectrequest`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(requestDetails),
+      }
+    );
     const data = await response.json();
     props.getRequestList();
     if (data.status === 200) {

@@ -21,7 +21,7 @@ const SignUp = (props) => {
       setMessage("Password should be greater then 4 characters");
     } else {
       setMessage("");
-      const res = await fetch("http://localhost:5000/auth/signup", {
+      const res = await fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
         method: "POST",
         headers: {
           Accept: "application/json",

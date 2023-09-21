@@ -7,7 +7,7 @@ const RoomMemberList = () => {
   const getMemberList = async () => {
     setMessage("");
     const response = await fetch(
-      `http://localhost:5000/user/roommemberlist/${params.roomid}`,
+      `${process.env.REACT_APP_URL}/user/roommemberlist/${params.roomid}`,
       {
         method: "GET",
         credentials: "include",
