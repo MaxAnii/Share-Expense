@@ -44,7 +44,7 @@ router.get(
     const image = req.user.photos[0].value;
     const user = await addGoogleGitUser(email, name, image, "Google");
     req.session.user = user;
-    res.redirect("http://localhost:3000/");
+    res.redirect("https://share-expense-rosy.vercel.app");
   }
 );
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
@@ -61,7 +61,7 @@ router.get(
     const user = await addGoogleGitUser(email, name, image, "Github");
 
     req.session.user = user;
-    res.redirect("http://localhost:3000/home");
+    res.redirect("https://share-expense-rosy.vercel.app/home");
   }
 );
 

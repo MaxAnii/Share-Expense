@@ -24,7 +24,7 @@ app.use(passport.session());
 app.use(passport.authenticate("session"));
 app.use(
   cors({
-    origin: "*",
+    origin: "https://share-expense-rosy.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
