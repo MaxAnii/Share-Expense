@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const passportSetup = require("./passport");
 const passport = require("passport");
 const cors = require("cors");
 const authRoute = require("./routes/auth");
@@ -14,8 +13,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
-      domain: "localhost:3000",
-      domain: "localhost",
+      domain: "https://share-expense-rosy.vercel.app/",
+      domain: "https://share-expense-rosy.vercel.app/",
     },
   })
 );
@@ -25,7 +24,7 @@ app.use(passport.session());
 app.use(passport.authenticate("session"));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://share-expense-rosy.vercel.app/",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -33,6 +32,5 @@ app.use(
 
 app.use("/auth", authRoute);
 app.use("/user", mainRoute);
-app.listen("5000", () => {
-  console.log("server  is alive");
-});
+
+module.exports = app;
