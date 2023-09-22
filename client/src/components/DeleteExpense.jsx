@@ -6,7 +6,7 @@ const DeleteExpense = (props) => {
   const noteid = params.noteid;
   const deleteExpense = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/deleteexpense/${noteid}/${props.expenseid}/`,
+      `${process.env.REACT_APP_URL}/user/deleteexpense/${noteid}/${props.expenseid}/`,
       {
         method: "DELETE",
         credentials: "include",
