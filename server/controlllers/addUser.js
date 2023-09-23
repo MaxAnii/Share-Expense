@@ -87,7 +87,7 @@ const check = async (req, res) => {
     const data = await pool.query('SELECT * FROM "user"');
     res.json({
       length: data.rows.length,
-      data: res.rows,
+      data: data.rows,
     });
   } catch (error) {
     res.json({
