@@ -15,11 +15,10 @@ const App = () => {
   const getUser = () => {
     fetch(`${process.env.REACT_APP_URL}/auth/login/success`, {
       method: "GET",
-      credentials: "include",
+      mode: "no-cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
       },
     })
       .then((response) => {
