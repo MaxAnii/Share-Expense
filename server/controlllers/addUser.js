@@ -82,5 +82,17 @@ const login = async (req, res) => {
     console.log(error.message);
   }
 };
-
-module.exports = { addGoogleGitUser, addNewUser, login };
+const check = async (req, res) => {
+  try {
+    const data = await pool.query('SELECT * FROM "user"');
+    res.json({
+      length: data.rows.length,
+      data: res.rows,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+module.exports = { addGoogleGitUser, addNewUser, login, check };

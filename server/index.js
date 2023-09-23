@@ -4,6 +4,7 @@ const passport = require("passport");
 const cors = require("cors");
 const authRoute = require("./routes/auth");
 const mainRoute = require("./routes/mainRoutes");
+const { check } = require("./controlllers/addUser");
 const app = express();
 app.use(express.json());
 app.use(
@@ -31,7 +32,7 @@ app.use(
     optionsSuccessStatus: 204,
   })
 );
-
+app.get("/check", check);
 app.use("/auth", authRoute);
 app.use("/user", mainRoute);
 
