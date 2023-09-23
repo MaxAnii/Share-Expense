@@ -23,6 +23,7 @@ const SignUp = (props) => {
       setMessage("");
       const res = await fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
         method: "POST",
+        mode: "no-cors",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
