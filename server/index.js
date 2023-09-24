@@ -27,6 +27,9 @@ app.use(
   cors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: true,
+    credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 app.get("/check", check);
