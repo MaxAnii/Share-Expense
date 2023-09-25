@@ -14,13 +14,16 @@ router.get("/login/failed", async (req, res) => {
 });
 
 router.get("/login/success", async (req, res) => {
-  console.log("called");
-  console.log(req.session.user);
   if (req.session.user) {
     res.status(200).json({
       success: true,
       message: "successfull",
       user: req.session.user,
+    });
+  } else {
+    res.json({
+      status: 400,
+      message: "no user",
     });
   }
 });
