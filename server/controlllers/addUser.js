@@ -76,7 +76,7 @@ const login = async (req, res) => {
         bio: result.rows.bio,
       };
       req.session.user = user;
-      res.json({ status: 200 });
+      res.json({ status: 200, user: req.session.user });
     } else res.json({ status: 400 });
   } catch (error) {
     console.log(error.message);
