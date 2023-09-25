@@ -23,7 +23,7 @@ app.use(passport.session());
 app.use(passport.authenticate("session"));
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: true,
     credentials: true,
