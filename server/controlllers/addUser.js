@@ -84,11 +84,15 @@ const login = async (req, res) => {
 };
 const check = async (req, res) => {
   try {
-    const data = await pool.query('SELECT * FROM "user"');
-    res.json({
-      length: data.rows.length,
-      data: data.rows,
-    });
+    console.log("called");
+    console.log(req.session.user);
+    if (req.session.user) {
+      res.status(200).json({
+        success: true,
+        message: "successfull",
+        user: req.session.user,
+      });
+    }
   } catch (error) {
     res.json({
       message: error.message,
