@@ -24,7 +24,6 @@ router.get("/login/success", async (req, res) => {
     res.json({
       status: 400,
       message: "no user",
-      session: req.session,
       user: req.session.user,
     });
   }
