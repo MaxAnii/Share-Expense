@@ -14,6 +14,8 @@ router.get("/login/failed", async (req, res) => {
 });
 
 router.get("/login/success", async (req, res) => {
+  console.log("called");
+  console.log(req.session.user);
   if (req.session.user) {
     res.status(200).json({
       success: true,
@@ -28,7 +30,7 @@ router.get("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:3000/");
+    res.redirect("https://share-expense-rosy.vercel.app/");
   });
 });
 
