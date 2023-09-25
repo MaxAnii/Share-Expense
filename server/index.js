@@ -14,7 +14,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
-      domain: "localhost:3000",
+      domain: "http://localhost:3000",
     },
   })
 );
