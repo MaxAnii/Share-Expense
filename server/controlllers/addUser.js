@@ -92,6 +92,11 @@ const check = async (req, res) => {
         message: "successfull",
         user: req.session.user,
       });
+    } else {
+      res.json({
+        status: 400,
+        message: "no-cookie",
+      });
     }
   } catch (error) {
     res.json({
