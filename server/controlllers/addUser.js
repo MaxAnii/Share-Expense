@@ -94,8 +94,7 @@ const check = async (req, res) => {
       });
     } else {
       res.json({
-        status: 400,
-        message: "no-cookie",
+        user: req.session.user,
       });
     }
   } catch (error) {
