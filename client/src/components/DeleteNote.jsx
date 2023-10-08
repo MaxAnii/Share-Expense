@@ -1,12 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DeleteNote = (props) => {
-  const params = useParams();
+  const navigate = useNavigate();
+
   const noteid = props.noteid;
   const deleteNote = async () => {
     const response = await fetch(
-      `http://localhost:5000/user/deletenote/${noteid}`,
+      `${process.env.REACT_APP_LOCALHOST}/user/deletenote/${noteid}`,
       {
         method: "DELETE",
         credentials: "include",
@@ -18,7 +19,7 @@ const DeleteNote = (props) => {
     );
     const data = await response.json();
     if (data.status === 200) {
-      props.getNote();
+      navigate(-1);
     } else {
       alert("error");
     }

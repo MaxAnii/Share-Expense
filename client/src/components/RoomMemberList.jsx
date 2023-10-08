@@ -7,7 +7,7 @@ const RoomMemberList = () => {
   const getMemberList = async () => {
     setMessage("");
     const response = await fetch(
-      `http://localhost:5000/user/roommemberlist/${params.roomid}`,
+      `${process.env.REACT_APP_LOCALHOST}/user/roommemberlist/${params.roomid}`,
       {
         method: "GET",
         credentials: "include",
@@ -24,6 +24,13 @@ const RoomMemberList = () => {
       setMemberDetails(data);
     }
   };
+  const modals = document.getElementsByClassName("modal");
+  for (const modal of modals) {
+    modal.addEventListener("click", (e) => {
+      console.log("member");
+      e.stopPropagation();
+    });
+  }
   return (
     <div>
       <button
@@ -31,7 +38,10 @@ const RoomMemberList = () => {
         className="edit-btn"
         data-bs-toggle="modal"
         data-bs-target="#staticBackdrop"
-        onClick={getMemberList}
+        onClick={(e) => {
+          getMemberList();
+          e.stopPropagation();
+        }}
       >
         Member List
       </button>
@@ -39,7 +49,6 @@ const RoomMemberList = () => {
       <div
         className="modal fade"
         id="staticBackdrop"
-        data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
         aria-labelledby="staticBackdropLabel"

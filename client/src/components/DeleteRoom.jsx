@@ -7,15 +7,18 @@ const DeleteRoom = () => {
     roomid: params.roomid,
   };
   const deleteRoom = async () => {
-    const response = await fetch("http://localhost:5000/user/deleteroom", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(roomDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_LOCALHOST}/user/deleteroom`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(roomDetails),
+      }
+    );
     const data = await response.json();
     if (data.status === 200) {
       navigate("/home");
@@ -23,6 +26,13 @@ const DeleteRoom = () => {
       alert("error");
     }
   };
+  const modals = document.getElementsByClassName("modal");
+  for (const modal of modals) {
+    modal.addEventListener("click", (e) => {
+      console.log("delete");
+      e.stopPropagation();
+    });
+  }
   return (
     <>
       <div>
@@ -31,6 +41,9 @@ const DeleteRoom = () => {
           className="edit-btn leave-room"
           data-bs-toggle="modal"
           data-bs-target="#delete-room"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           Delete Room
         </button>
@@ -38,7 +51,6 @@ const DeleteRoom = () => {
         <div
           className="modal fade"
           id="delete-room"
-          data-bs-backdrop="static"
           data-bs-keyboard="false"
           tabIndex="-1"
           aria-labelledby="staticBackdropLabel"
@@ -73,7 +85,10 @@ const DeleteRoom = () => {
                   type="button"
                   className="btn btn-danger"
                   data-bs-dismiss="modal"
-                  onClick={deleteRoom}
+                  onClick={(e) => {
+                    deleteRoom();
+                    e.stopPropagation();
+                  }}
                 >
                   Delete
                 </button>

@@ -10,9 +10,9 @@ const ChangePassword = (props) => {
   const changePassword = async () => {
     setMessage("");
     if (
-      password.oldPassword.length == 0 ||
-      password.newPassword.length == 0 ||
-      password.confrimPassword.length == 0
+      password.oldPassword.length === 0 ||
+      password.newPassword.length === 0 ||
+      password.confrimPassword.length === 0
     ) {
       setMessage("Please fil the details");
     } else if (password.confrimPassword !== password.newPassword) {
@@ -21,7 +21,7 @@ const ChangePassword = (props) => {
       setMessage("Password is incorrect");
     } else {
       const response = await fetch(
-        "http://localhost:5000/user/updatepassword",
+        `${process.env.REACT_APP_LOCALHOST}/user/updatepassword`,
         {
           method: "PUT",
           headers: {

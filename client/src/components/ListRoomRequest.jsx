@@ -16,7 +16,7 @@ const ListRoomRequest = (props) => {
     setRequestList([]);
     setMessage("Loading...");
     const response = await fetch(
-      `http://localhost:5000/user/roomrequest/${props.userid}`,
+      `${process.env.REACT_APP_LOCALHOST}/user/roomrequest/${props.userid}`,
       {
         method: "GET",
         credentials: "include",

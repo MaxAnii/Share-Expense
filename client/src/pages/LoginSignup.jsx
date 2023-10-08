@@ -6,10 +6,10 @@ import SignUp from "../components/SignUp";
 const LoginSignup = (props) => {
   const [show, setShow] = useState(true);
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_LOCALHOST}/auth/google`, "_self");
   };
   const github = () => {
-    window.open("http://localhost:5000/auth/github", "_self");
+    window.open(`${process.env.REACT_APP_LOCALHOST}/auth/github`, "_self");
   };
   return (
     <div className="login">
@@ -32,7 +32,7 @@ const LoginSignup = (props) => {
         <div className="right">
           {show ? (
             <>
-              <Login getUser={props.getUser}></Login>
+              <Login setReload={props.setReload}></Login>
               <div className="signup-link">
                 Don't have an account?{" "}
                 <button

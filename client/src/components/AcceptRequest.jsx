@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-
+const http = process.env.http;
 const AcceptRequest = (props) => {
   const [requestDetails, setRequestDetails] = useState({
     roomid: props.roomid,
     userid: props.userid,
   });
   const acceptRequest = async () => {
-    const response = await fetch("http://localhost:5000/user/acceptrequest", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(requestDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_LOCALHOST}/user/acceptrequest`,
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(requestDetails),
+      }
+    );
     const data = await response.json();
     props.getRequestList();
     if (data.status === 200) alert("Room Added");
     else alert("Error");
   };
+  console.log(http);
   return (
     <div>
       <button className="accept-btn" onClick={acceptRequest}>

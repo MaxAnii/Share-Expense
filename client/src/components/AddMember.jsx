@@ -9,7 +9,7 @@ const AddMember = (props) => {
     e.preventDefault();
     setMessage("");
     const response = await fetch(
-      `http://localhost:5000/user/getmember/${username}`,
+      `${process.env.REACT_APP_LOCALHOST}/user/getmember/${username}`,
       {
         method: "GET",
         credentials: "include",
@@ -30,18 +30,21 @@ const AddMember = (props) => {
     }
   };
   const sendRequest = async (userid) => {
-    const response = await fetch("http://localhost:5000/user/sendrequest", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        roomid: props.roomid,
-        userid,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_LOCALHOST}/user/sendrequest`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          roomid: props.roomid,
+          userid,
+        }),
+      }
+    );
 
     const data = await response.json();
     setMessage(data.message);

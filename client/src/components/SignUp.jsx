@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import SignupSuccess from "./SignupSuccess";
+import LoadingButton from "./LoadingButton";
 
 const SignUp = (props) => {
   const [user, setUser] = useState({
@@ -11,25 +12,29 @@ const SignUp = (props) => {
   const [confrimPass, setConfrimPass] = useState("");
   const [message, setMessage] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const signup = async (e) => {
     e.preventDefault();
     setMessage("");
-
+    setShowSpinner(true);
     if (user.password !== confrimPass) {
       setMessage("Password is not matching");
     } else if (confrimPass.length < 4) {
       setMessage("Password should be greater then 4 characters");
     } else {
       setMessage("");
-      const res = await fetch("http://localhost:5000/auth/signup", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(user),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_LOCALHOST}/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(user),
+        }
+      );
       const data = await res.json();
 
       if (data.status === 404) {
@@ -44,6 +49,7 @@ const SignUp = (props) => {
         setShowSuccess(true);
       }
     }
+    setShowSpinner(false);
   };
   return (
     <>
@@ -78,7 +84,11 @@ const SignUp = (props) => {
             value={confrimPass}
             onChange={(e) => setConfrimPass(e.target.value)}
           />
-          <button className="submit">Sign Up</button>
+          {showSpinner ? (
+            <LoadingButton></LoadingButton>
+          ) : (
+            <button className="submit">Sign Up</button>
+          )}
         </div>
       </form>
       {showSuccess ? <SignupSuccess></SignupSuccess> : ""}

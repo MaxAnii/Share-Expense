@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Offcanvas = () => {
   const logout = () => {
-    window.open("http://localhost:5000/auth/logout", "_self");
+    window.open(`${process.env.REACT_APP_LOCALHOST}/auth/logout`, "_self");
   };
   const Navigate = useNavigate();
   return (
