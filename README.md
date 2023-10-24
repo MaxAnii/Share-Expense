@@ -43,11 +43,11 @@ Here you can accept or reject the room invitation.
 # Profile![Screenshot 2023-10-24 203100](https://github.com/MaxAnii/Share-Expense/assets/96937469/58f40a91-0c0a-4b46-a361-3b707b12781a)
 Here you can change your profile.
 - - - - 
-By [Ansar] (https://github.com/MaxAnii) with ❤️.
-- - - -
 # TEST USER
 **Email:** "test@gmail.com"
-
 **Password:** "test"
+- - - -
+By [Ansar](https://github.com/MaxAnii) with ❤️.
+
 # LICENSE
 MIT ©️ 2023
