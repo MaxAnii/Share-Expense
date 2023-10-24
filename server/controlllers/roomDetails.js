@@ -58,8 +58,9 @@ const getRoomMemberList = async (req, res) => {
       'SELECT "id","name","image" FROM "user" WHERE "id" IN (SELECT "adminid" FROM "room" WHERE "id"=$1 UNION SELECT "memberid" FROM "roomMember" WHERE "roomid"=$1 AND "status"=$2)',
       [roomid, status]
     );
+    console.log(result.rows);
     if (result.rows.length !== 0) {
-      res.status(200).json(result.rows);
+      res.json(result.rows);
     } else {
       res.json({
         status: 400,

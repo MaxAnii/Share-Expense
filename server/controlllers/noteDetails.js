@@ -11,6 +11,7 @@ const postgresDateFormate = () => {
 const addNote = async (req, res) => {
   try {
     const { id, name, roomid, adminid } = req.body;
+    console.log(req.body);
     const date = postgresDateFormate();
     const result = await pool.query(
       'INSERT INTO "note" VALUES($1,$2,$3,$4,$5) RETURNING *',
@@ -34,7 +35,8 @@ const getNote = async (req, res) => {
   try {
     const { roomid } = req.params;
     const reslut = await pool.query(
-      'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."id" ORDER BY "creationdate","note"."name" ASC',
+      // 'SELECT "note"."id", "note"."name" as "noteName","roomid","adminid","creationdate","user"."name" FROM "note","user" WHERE "roomid"=$1 AND "adminid"="user"."id" ORDER BY "creationdate","note"."name" ASC',
+      'SELECT "n"."id", "n"."name" as "noteName", "n"."roomid","n"."adminid","creationdate","user"."name", SUM("e"."amount") AS total_amount FROM "user" , "note" AS n LEFT JOIN "expense" AS e ON "n"."id" = "e"."noteid" WHERE "n"."roomid"=$1 AND "n"."adminid"="user"."id" GROUP BY "n"."id", "n"."name", "n"."roomid","user"."name","n"."adminid","creationdate" ',
       [roomid]
     );
     if (reslut.rows.length !== 0) {

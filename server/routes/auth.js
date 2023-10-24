@@ -20,6 +20,12 @@ router.get("/login/success", async (req, res) => {
       message: "successfull",
       user: req.session.user,
     });
+  } else {
+    res.json({
+      status: 400,
+      message: "no user",
+      user: req.session.user,
+    });
   }
 });
 
@@ -44,7 +50,7 @@ router.get(
     const image = req.user.photos[0].value;
     const user = await addGoogleGitUser(email, name, image, "Google");
     req.session.user = user;
-    res.redirect("http://localhost:3000/");
+    res.redirect("hhttp://localhost:3000");
   }
 );
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));

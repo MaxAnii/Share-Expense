@@ -55,7 +55,7 @@ const addNewUser = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    res.json({ status: 404, message: error.message });
   }
 };
 
@@ -76,11 +76,31 @@ const login = async (req, res) => {
         bio: result.rows.bio,
       };
       req.session.user = user;
-      res.json({ status: 200 });
+      res.json({ status: 200, user: req.session.user });
     } else res.json({ status: 400 });
   } catch (error) {
     console.log(error.message);
   }
 };
-
-module.exports = { addGoogleGitUser, addNewUser, login };
+const check = async (req, res) => {
+  try {
+    console.log("called");
+    console.log(req.session.user);
+    if (req.session.user) {
+      res.status(200).json({
+        success: true,
+        message: "successfull",
+        user: req.session.user,
+      });
+    } else {
+      res.json({
+        user: req.session.user,
+      });
+    }
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+module.exports = { addGoogleGitUser, addNewUser, login, check };
