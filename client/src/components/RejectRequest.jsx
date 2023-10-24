@@ -7,7 +7,11 @@ const RejectRequest = (props) => {
   });
   const rejectRoomRequest = async () => {
     const response = await fetch(
+<<<<<<< HEAD
       `${process.env.REACT_APP_LOCALHOST}/user/rejectrequest`,
+=======
+      `${process.env.REACT_APP_URL}/user/rejectrequest`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       {
         method: "DELETE",
         credentials: "include",

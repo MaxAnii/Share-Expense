@@ -9,7 +9,11 @@ const AddMember = (props) => {
     e.preventDefault();
     setMessage("");
     const response = await fetch(
+<<<<<<< HEAD
       `${process.env.REACT_APP_LOCALHOST}/user/getmember/${username}`,
+=======
+      `${process.env.REACT_APP_URL}/user/getmember/${username}`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       {
         method: "GET",
         credentials: "include",
@@ -31,7 +35,11 @@ const AddMember = (props) => {
   };
   const sendRequest = async (userid) => {
     const response = await fetch(
+<<<<<<< HEAD
       `${process.env.REACT_APP_LOCALHOST}/user/sendrequest`,
+=======
+      `${process.env.REACT_APP_URL}/user/sendrequest`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       {
         method: "POST",
         credentials: "include",

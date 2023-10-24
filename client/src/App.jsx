@@ -15,9 +15,13 @@ const App = () => {
   const [updateUser, setUpdateUser] = useState(false);
   const [reload, setReload] = useState(false);
   const getUser = () => {
+<<<<<<< HEAD
     fetch(`${process.env.REACT_APP_LOCALHOST}/auth/login/success`, {
+=======
+    fetch(`${process.env.REACT_APP_URL}/check`, {
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       method: "GET",
-      credentials: "include",
+      mode: "no-cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -36,8 +40,13 @@ const App = () => {
   };
   useEffect(() => {
     getUser();
+<<<<<<< HEAD
     if (reload) window.location.reload();
   }, [reload]);
+=======
+  }, []);
+  console.log(user);
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
   return (
     <BrowserRouter>
       <div>

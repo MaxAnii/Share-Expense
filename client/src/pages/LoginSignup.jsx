@@ -6,10 +6,17 @@ import SignUp from "../components/SignUp";
 const LoginSignup = (props) => {
   const [show, setShow] = useState(true);
   const google = () => {
+<<<<<<< HEAD
     window.open(`${process.env.REACT_APP_LOCALHOST}/auth/google`, "_self");
   };
   const github = () => {
     window.open(`${process.env.REACT_APP_LOCALHOST}/auth/github`, "_self");
+=======
+    window.open(`${process.env.REACT_APP_URL}/auth/google`, "_self");
+  };
+  const github = () => {
+    window.open(`${process.env.REACT_APP_URL}/auth/github`, "_self");
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
   };
   return (
     <div className="login">

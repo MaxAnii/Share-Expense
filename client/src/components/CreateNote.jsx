@@ -19,7 +19,11 @@ const CreateNote = (props) => {
       setMessage("Note name should be less then 15 characters");
     } else {
       const response = await fetch(
+<<<<<<< HEAD
         `${process.env.REACT_APP_LOCALHOST}/user/addNote`,
+=======
+        `${process.env.REACT_APP_URL}/user/addNote`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
         {
           method: "POST",
           headers: {
