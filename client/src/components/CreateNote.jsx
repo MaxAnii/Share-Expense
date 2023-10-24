@@ -15,23 +15,24 @@ const CreateNote = (props) => {
     setMessage("");
     if (NoteDetails.name.length == 0) {
       setMessage("Please fil the details");
+    } else if (NoteDetails.name.length > 15) {
+      setMessage("Note name should be less then 15 characters");
     } else {
-      const response = await fetch("http://localhost:5000/user/addNote", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(NoteDetails),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_LOCALHOST}/user/addNote`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(NoteDetails),
+        }
+      );
       if (response.status == 200) {
         setMessage("Note created");
-        setNoteDetails({
-          id: uuidv4(),
-          name: "",
-          adminId: props.adminId,
-        });
+        setNoteDetails({ ...NoteDetails, id: uuidv4(), name: "" });
         props.getNote();
         setShowConfrim(false);
       } else setMessage("An error has occurred");

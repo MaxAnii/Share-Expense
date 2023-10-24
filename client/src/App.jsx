@@ -12,17 +12,18 @@ import PersonalInformation from "./pages/PersonalInformation";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [updateUser, setUpdateUser] = useState(false);
+  const [reload, setReload] = useState(false);
   const getUser = () => {
-    fetch("http://localhost:5000/auth/login/success", {
+    fetch(`${process.env.REACT_APP_LOCALHOST}/auth/login/success`, {
       method: "GET",
       credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
       },
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.status === 200) return response.json();
         throw new Error("authentication has been failed!");
       })
@@ -35,11 +36,12 @@ const App = () => {
   };
   useEffect(() => {
     getUser();
-  }, []);
+    if (reload) window.location.reload();
+  }, [reload]);
   return (
     <BrowserRouter>
       <div>
-        <Navbar user={user} />
+        <Navbar user={user} updateUser={updateUser} />
         <Routes>
           <Route
             path="/"
@@ -51,7 +53,7 @@ const App = () => {
               user ? (
                 <Home user={user}></Home>
               ) : (
-                <LoginSignup getUser={getUser} />
+                <LoginSignup setReload={setReload} />
               )
             }
           />
@@ -70,7 +72,16 @@ const App = () => {
           />
           <Route
             path="/home/personalinformation"
-            element={user ? <PersonalInformation user={user} /> : <Landing />}
+            element={
+              user ? (
+                <PersonalInformation
+                  user={user}
+                  setUpdateUser={setUpdateUser}
+                />
+              ) : (
+                <Landing />
+              )
+            }
           />
           <Route
             path="/room/:roomid/:roomadminid/notedata/:noteid/:usernoteid/:notename"

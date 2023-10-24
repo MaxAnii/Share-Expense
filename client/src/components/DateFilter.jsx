@@ -1,17 +1,11 @@
 import React, { useEffect } from "react";
+import moment from "moment-timezone";
 
 const DateFilter = (props) => {
-  const date = new Date().toLocaleDateString();
-  const dateArray = date.split("/");
-  const year = dateArray[2];
-  const month = dateArray[1];
-  const day = dateArray[0];
-  const toDate = year + "-" + month + "-" + day;
-
-  var firstDayDate = new Date(year, month, 1).toLocaleDateString();
-  const firstDayDateArray = firstDayDate.split("/");
-  const dayfirst = firstDayDateArray[0];
-  const from = year + "-" + month + "-" + dayfirst;
+  var momentDate = moment();
+  const date = momentDate.format("YYYY-MM-DD");
+  const toDate = date;
+  const from = momentDate.format("YYYY-MM") + "-" + "01";
 
   useEffect(() => {
     props.setToDate(toDate);

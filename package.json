@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "scripts": {
+    "build-client": "cd client && npm run build",
+    "run-server": "node index.js",
+    "deploy": "build-client && run-server"
+  }
+}

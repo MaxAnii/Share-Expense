@@ -1,29 +1,38 @@
 import { useState } from "react";
+import LoadingButton from "./LoadingButton";
+import { useNavigate } from "react-router-dom";
 const Login = (props) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
   const localLogin = async (e) => {
     e.preventDefault();
+    setShowSpinner(true);
     setMessage("");
-    const response = await fetch("http://localhost:5000/auth/login/local", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(user),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_LOCALHOST}/auth/login/local`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(user),
+      }
+    );
     const data = await response.json();
     if (data.status === 200) {
-      props.getUser();
-      window.location.reload();
+      props.setReload((prev) => !prev);
+      navigate("/home");
     } else {
       setMessage("Invalid Credentials");
     }
+    setShowSpinner(false);
   };
   return (
     <form onSubmit={localLogin}>
@@ -45,7 +54,11 @@ const Login = (props) => {
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-        <button className="submit">Login</button>
+        {showSpinner ? (
+          <LoadingButton></LoadingButton>
+        ) : (
+          <button className="submit">Login</button>
+        )}
       </div>
     </form>
   );

@@ -9,15 +9,18 @@ const LeaveRoom = (props) => {
     roomid: params.roomid,
   };
   const leaveRoom = async () => {
-    const response = await fetch("http://localhost:5000/user/leaveroom", {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(roomDetails),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_LOCALHOST}/user/leaveroom`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(roomDetails),
+      }
+    );
     const data = await response.json();
     if (data.status === 200) {
       navigate("/home");
@@ -25,6 +28,12 @@ const LeaveRoom = (props) => {
       alert("error");
     }
   };
+  const modals = document.getElementsByClassName("modal");
+  for (const modal of modals) {
+    modal.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
   return (
     <>
       <div>
@@ -33,6 +42,9 @@ const LeaveRoom = (props) => {
           className="edit-btn leave-room"
           data-bs-toggle="modal"
           data-bs-target="#leave-room"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           Leave Room
         </button>
@@ -75,7 +87,10 @@ const LeaveRoom = (props) => {
                   type="button"
                   className="btn btn-danger"
                   data-bs-dismiss="modal"
-                  onClick={leaveRoom}
+                  onClick={(e) => {
+                    leaveRoom();
+                    e.stopPropagation();
+                  }}
                 >
                   Leave Room
                 </button>

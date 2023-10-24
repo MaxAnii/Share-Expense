@@ -305,7 +305,7 @@ font-size: x-large;
   z-index: 2;
 }
 .edit-details{
-  position: fixed; 
+  position: sticky; 
  bottom: 70vh;
   right: 16vw;
   height: 60px;
@@ -459,13 +459,16 @@ font-weight: 450;
 .note-data{
   margin: 5px;
 }
+.add-expense{
+  margin-top:25px;
+}
 .add-expense-btn{
   margin-left: 46.5%;
 }
 .note-name {
-  text-align: center;
-  margin-bottom: 10px;
-}
+  display: inline-flex;
+    margin-top: 10px;
+  }
 .expense-option{
   display: flex;
   flex-direction: row-reverse;
@@ -485,6 +488,7 @@ font-weight: 450;
  position: absolute;
  top: 20vh;
  right: 10px;
+
 }
 
 .leave-room{
@@ -528,7 +532,6 @@ right: 0.5vw;
 }
 .drop-menu-list {
   list-style: none;
-  padding-left: 0rem;
   padding-right: 1rem;
 }
 .date-container{
@@ -571,10 +574,7 @@ right: 0.5vw;
   margin-top: 5px;
   margin-left: .9vw;
 }
-/* .user-name-container input {
-  width: 30vw;
-  height: 5vh;
-} */
+
 .other-details{
   margin: 5vh;
 }
@@ -602,16 +602,23 @@ right: 0.5vw;
 .card-body{
   min-height: 13vh;
 }
-.note-delete{
-  margin-top: -1.6vh;
+
+
+.spinner{
+  width: 3rem;
+  height: 3rem;
+ position: relative;
+ margin-top: 30vh;
+ left: 50%;
 }
 
-
-
-
-
-
-
+.note-delete{
+  margin-top: -1.6vh;
+  display: inline-flex;
+  position: relative;
+  bottom: .8vh;
+  left: 80vw;
+}
 
 
 
@@ -681,5 +688,11 @@ display: block;
 }
 .edit-details{
   right: 30px;
+}
+.offcanvas-footer{
+  top:85vh;
+}
+.note-delete{
+  left: 45vw;
 }
 }

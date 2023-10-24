@@ -7,12 +7,32 @@ import DeleteRoom from "./DeleteRoom";
 const RoomOption = (props) => {
   const params = useParams();
   const [show, setShow] = useState(false);
+  const modals = document.getElementsByClassName("modal");
+  for (const modal of modals) {
+    modal.addEventListener("click", (e) => {
+      console.log("main");
+      e.stopPropagation();
+    });
+  }
+  document.addEventListener("click", () => {
+    if (show) {
+      setShow(false);
+      props.setZIndex("");
+    }
+  });
   return (
     <>
       <div className="btn-group">
         <button
           className="edit-btn btn btn-outline-dark"
-          onClick={() => setShow(!show)}
+          onClick={(e) => {
+            setShow(!show);
+            props.setZIndex((prev) => {
+              if (prev === "") return "-1";
+              else return "";
+            });
+            e.stopPropagation();
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,12 +50,12 @@ const RoomOption = (props) => {
         </button>
 
         {show ? (
-          <div className="drop-menu">
+          <div className="drop-menu room-option">
             <ul className="drop-menu-list">
               <li className="option-item">
                 <RoomMemberList></RoomMemberList>
               </li>
-
+              <hr></hr>
               <li className="option-item">
                 {params.roomadminid === props.userid ? (
                   <DeleteRoom></DeleteRoom>
