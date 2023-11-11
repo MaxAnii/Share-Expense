@@ -21,10 +21,9 @@ router.get("/login/success", async (req, res) => {
       user: req.session.user,
     });
   } else {
-    res.json({
-      status: 400,
-      message: "no user",
-      user: req.session.user,
+    res.status(500).json({
+      success: false,
+      message: "unsuccessfull",
     });
   }
 });
@@ -34,7 +33,7 @@ router.get("/logout", function (req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:3000/");
+    res.redirect("/");
   });
 });
 
@@ -50,7 +49,7 @@ router.get(
     const image = req.user.photos[0].value;
     const user = await addGoogleGitUser(email, name, image, "Google");
     req.session.user = user;
-    res.redirect("hhttp://localhost:3000");
+    res.redirect("https://shareexpense.vercel.app/");
   }
 );
 router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
@@ -67,7 +66,7 @@ router.get(
     const user = await addGoogleGitUser(email, name, image, "Github");
 
     req.session.user = user;
-    res.redirect("http://localhost:3000/home");
+    res.redirect("https://shareexpense.vercel.app/");
   }
 );
 

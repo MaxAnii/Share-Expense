@@ -14,7 +14,11 @@ const Login = (props) => {
     setShowSpinner(true);
     setMessage("");
     const response = await fetch(
+<<<<<<< HEAD
       `${process.env.REACT_APP_LOCALHOST}/auth/login/local`,
+=======
+      `${process.env.REACT_APP_URL}/auth/login/local`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       {
         method: "POST",
         headers: {

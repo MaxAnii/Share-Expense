@@ -15,7 +15,11 @@ const ViewExpense = (props) => {
     setExpenseData([]);
     setShowSpinner(true);
     const response = await fetch(
+<<<<<<< HEAD
       `${process.env.REACT_APP_LOCALHOST}/user/getexpense/${props.noteid}/${fromDate}/${toDate}`,
+=======
+      `${process.env.REACT_APP_URL}/user/getexpense/${props.noteid}/${fromDate}/${toDate}`,
+>>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
       {
         method: "GET",
         credentials: "include",

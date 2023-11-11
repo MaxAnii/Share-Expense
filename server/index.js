@@ -1,66 +1,60 @@
 const express = require("express");
 const session = require("express-session");
+const passportSetup = require("./passport");
 const passport = require("passport");
 const cors = require("cors");
 const authRoute = require("./routes/auth");
 const mainRoute = require("./routes/mainRoutes");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const path = require("path");
-require("dotenv").config();
-
 const app = express();
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(cors());
+
+const genFunc = require("connect-pg-simple");
+
+const PostgresqlStore = genFunc(session);
+const sessionStore = new PostgresqlStore({
+  conString: process.env.POSTGRES_URL + "?sslmode=require",
+});
+
 app.use(
   session({
     secret: process.env.SECRET,
-
-    secret: process.env.SECRET_KEY,
-
     resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 15 * 24 * 60 * 60 * 1000, // 1 day in milliseconds
+    saveUninitialized: true,
 
-      domain: "localhost:3000",
+    cookie: {
+      maxAge: 15 * 24 * 60 * 60 * 1000, // 15 day in milliseconds
     },
+    store: sessionStore,
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.authenticate("session"));
-app.use(
-  cors({
-    origin: ["http://localhost:3000"],
-    methods: "GET,POST,PUT,DELETE",
 
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-
-    credentials: true,
-  })
-);
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  next();
-});
-
-app.get("/check", check);
 app.use("/auth", authRoute);
 app.use("/user", mainRoute);
-
 app.get("/check", async (req, res) => {
   res.json({
     message: "connection successful",
   });
 });
 
-app.listen("5000", () => {
-  console.log("server  is alive");
+app.use(express.static(path.join(__dirname, "build")));
+app.use("/", express.static(path.join(__dirname, "build")));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+module.exports = app;
