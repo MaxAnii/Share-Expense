@@ -16,11 +16,9 @@ const RoomList = (props) => {
   const getRoom = async () => {
     setMessage("loading...");
     const response = await fetch(
-<<<<<<< HEAD
+ 
       `${process.env.REACT_APP_LOCALHOST}/user/getroom/${props.userid}`,
-=======
-      `${process.env.REACT_APP_URL}/user/getroom/${props.userid}`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+ 
       {
         method: "GET",
         credentials: "include",

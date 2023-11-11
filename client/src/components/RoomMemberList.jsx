@@ -7,11 +7,9 @@ const RoomMemberList = () => {
   const getMemberList = async () => {
     setMessage("");
     const response = await fetch(
-<<<<<<< HEAD
+ 
       `${process.env.REACT_APP_LOCALHOST}/user/roommemberlist/${params.roomid}`,
-=======
-      `${process.env.REACT_APP_URL}/user/roommemberlist/${params.roomid}`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+ 
       {
         method: "GET",
         credentials: "include",

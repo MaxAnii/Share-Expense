@@ -8,7 +8,9 @@ const PersonalInformation = ({ user, setUpdateUser }) => {
   const getUserDetails = async () => {
     setShowSpinner(true);
     const response = await fetch(
-      `http://localhost:5000/user/getuserdetails/${user.id}`,
+ 
+      `${process.env.REACT_APP_LOCALHOST}/user/getuserdetails/${user.id}`,
+ 
       {
         method: "GET",
         credentials: "include",
@@ -24,15 +26,23 @@ const PersonalInformation = ({ user, setUpdateUser }) => {
     setShowSpinner(false);
   };
   const updateDetails = async () => {
-    const response = await fetch("http://localhost:5000/user/updatedetails", {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        Accept: "Application/json",
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify(userDetails),
-    });
+
+
+    const response = await fetch(
+
+      `${process.env.REACT_APP_LOCALHOST}/user/updatedetails`,
+
+      {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          Accept: "Application/json",
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(userDetails),
+      }
+    );
+
     const data = await response.json();
     getUserDetails();
     alert(data.message);

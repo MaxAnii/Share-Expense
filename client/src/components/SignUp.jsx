@@ -23,7 +23,7 @@ const SignUp = (props) => {
       setMessage("Password should be greater then 4 characters");
     } else {
       setMessage("");
-<<<<<<< HEAD
+ 
       const res = await fetch(
         `${process.env.REACT_APP_LOCALHOST}/auth/signup`,
         {
@@ -36,18 +36,8 @@ const SignUp = (props) => {
           body: JSON.stringify(user),
         }
       );
-=======
-      const res = await fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(user),
-      });
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+ 
+ 
       const data = await res.json();
 
       if (data.status === 404) {

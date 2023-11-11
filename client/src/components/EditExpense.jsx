@@ -14,11 +14,10 @@ const EditExpense = (props) => {
   const updateExpense = async () => {
     setMessage("");
     const response = await fetch(
-<<<<<<< HEAD
+
       `${process.env.REACT_APP_LOCALHOST}/user/updateexpense`,
-=======
-      `${process.env.REACT_APP_URL}/user/updateexpense`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+
+
       {
         method: "PUT",
         credentials: "include",

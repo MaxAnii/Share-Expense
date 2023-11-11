@@ -19,11 +19,9 @@ const NoteData = ({ user }) => {
     e.preventDefault();
     setMessage("");
     const response = await fetch(
-<<<<<<< HEAD
+ 
       `${process.env.REACT_APP_LOCALHOST}/user/addexpense`,
-=======
-      `${process.env.REACT_APP_URL}/user/addexpense`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+ 
       {
         method: "POST",
         credentials: "include",

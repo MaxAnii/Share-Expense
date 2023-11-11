@@ -4,16 +4,21 @@ const AddMember = (props) => {
   const [userDetails, setUserDetails] = useState([]);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
+  const modals = document.getElementsByClassName("modal");
+  for (const modal of modals) {
+    modal.addEventListener("click", (e) => {
+    
+      e.stopPropagation();
+    });
+  }
   const searchMember = async (e) => {
     setUserDetails([]);
     e.preventDefault();
     setMessage("");
     const response = await fetch(
-<<<<<<< HEAD
+
       `${process.env.REACT_APP_LOCALHOST}/user/getmember/${username}`,
-=======
-      `${process.env.REACT_APP_URL}/user/getmember/${username}`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+
       {
         method: "GET",
         credentials: "include",
@@ -35,11 +40,9 @@ const AddMember = (props) => {
   };
   const sendRequest = async (userid) => {
     const response = await fetch(
-<<<<<<< HEAD
+ 
       `${process.env.REACT_APP_LOCALHOST}/user/sendrequest`,
-=======
-      `${process.env.REACT_APP_URL}/user/sendrequest`,
->>>>>>> adfb086a38e11df6a1b5ac3fcc248b7c80b4f98a
+ 
       {
         method: "POST",
         credentials: "include",
