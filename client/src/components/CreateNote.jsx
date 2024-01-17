@@ -2,13 +2,6 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 const CreateNote = (props) => {
-  const modals = document.getElementsByClassName("modal");
-  for (const modal of modals) {
-    modal.addEventListener("click", (e) => {
-    
-      e.stopPropagation();
-    });
-  }
   const params = useParams();
   const [NoteDetails, setNoteDetails] = useState({
     id: uuidv4(),
@@ -71,6 +64,7 @@ const CreateNote = (props) => {
         tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
+        onClick={e=>e.stopPropagation()}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
