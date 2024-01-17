@@ -4,13 +4,6 @@ const AddMember = (props) => {
   const [userDetails, setUserDetails] = useState([]);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
-  const modals = document.getElementsByClassName("modal");
-  for (const modal of modals) {
-    modal.addEventListener("click", (e) => {
-    
-      e.stopPropagation();
-    });
-  }
   const searchMember = async (e) => {
     setUserDetails([]);
     e.preventDefault();
@@ -86,6 +79,7 @@ const AddMember = (props) => {
         tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
+        onClick={e=>e.stopPropagation()}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
