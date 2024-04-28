@@ -8,6 +8,10 @@
 
 
 #  Share-Expense
+
+![Screenshot 2024-04-28 124454](https://github.com/MaxAnii/Share-Expense/assets/96937469/df519d10-e5ee-4cf1-9d1a-a46f6c1440e1)
+
+
 Share Expense is platform where you can easily share the expense between the friends and roommates. This project is created with [React.js](https://react.dev/) and various node js packages.
 
 # Features 
