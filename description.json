@@ -3,7 +3,7 @@
   "description": " Share Expense provides teams with the essential resources, this project has ensured that they have everything they need tefficiently coordinate their finances. Collaborative spaces were established, and members were encouraged to join and participate. Monitored expenses seamlessly through note writing and maintenance, leading to a 25% increase in financial transparency.",
   "banner": "https://projectbanners.s3.eu-north-1.amazonaws.com/Screenshot+2024-08-27+115550.png",
   "github": "https://github.com/MaxAnii/Share-Expense",
-  "live":"https://shareexpense.vercel.app/"
+  "live":"https://shareexpense.vercel.app/",
   "projectNumber": 2,
   "techStack": "React JS, Bootstrap, Node JS, PostgreSQL, Express, Passport JS."
 }
